@@ -45,7 +45,6 @@ if (count($files) > 0) {
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Hostname</th>
       <th scope="col">MAC</th>
       <th scope="col">IPAddresses</th>
@@ -60,7 +59,6 @@ if (count($files) > 0) {
    foreach($files as $file) {
      $jsonDecode = json_decode(file_get_contents($file), true);
      echo '<tr>';
-     echo '<th scope="row">'.$row.'</th>';
      echo '<td>'.$jsonDecode['hostname'].'</th>';
      echo '<td>'.$jsonDecode['macAddress'].'</th>';
      echo '<td>'.$jsonDecode['ipAddresses'].'</th>';
