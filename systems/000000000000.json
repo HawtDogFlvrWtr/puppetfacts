@@ -1,0 +1,11 @@
+{
+    "macAddress": "00:00:00:00:00:00",
+    "hostname": "testsystem",
+    "fqdn": "testsystem.domain.com",
+    "domain": "domain.com",
+    "ipAddresses": "192.168.1.1,192.168.1.2",
+    "dnsAddresses": "192.168.1.1,192.168.1.2",
+    "gateway": "192.168.1.1",
+    "netmask": "255.255.255.0",
+    "role": "default"
+}
