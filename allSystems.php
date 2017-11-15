@@ -8,27 +8,34 @@ $row = 1;
 $msgBox = '';
 # Delete Record
 if (isset($_GET['macAddress'])){
-        if (file_exists('systems/'.cleanMac($_GET['macAddress']).".json")) {
-                if ( isset($_GET['delete'])) {
-                        if (unlink('systems/'.cleanMac($_GET['macAddress']).".json")) {
-                          $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>This system configuration was deleted.<button type='button' class='close' data-dismiss='alert' aria-
-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                        } else {
-                          $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>This system configuration wasn't deleted. Please try again.<button type='button' class='close' data-d
-ismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-                        }
-		}
-	}
+  if (file_exists('systems/'.cleanMac($_GET['macAddress']).".json")) {
+    if ( isset($_GET['delete'])) {
+      if (unlink('systems/'.cleanMac($_GET['macAddress']).".json")) {
+        $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                     This system configuration was deleted.
+                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                       <span aria-hidden='true'>&times;</span>
+                     </button>
+                   </div>";
+      } else {
+        $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                     This system configuration wasn't deleted. Please try again.
+                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                       <span aria-hidden='true'>&times;</span>
+                     </button>
+                   </div>";
+      }
+    }
+  }
 }
+# Get list of systems, This after the delete statement above, so it updates the page on post.
 $files = glob('systems/*.{json}', GLOB_BRACE);
+if ($msgBox != "") {
+  echo '<div class="container">';
+  echo $msgBox;
+  echo '</div>';
+}
 ?>
-        <?php
-        if ($msgBox != "") {
-                echo '<div class="container">';
-                echo $msgBox;
-                echo '</div>';
-        }
-        ?>
 <div class="container border rounded bg-light">
 <h1>All Systems</h1>
 <p>These are the current systems that you have configuration information for. You can edit or delete any record.</p>
@@ -67,31 +74,30 @@ if (count($files) > 0) {
 	  </td>';
      echo '</tr>';
      echo '<div id="delete'.$row.'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-                <div class="modal-content">
-                        <form action="allSystems.php" method="get">
-                                <div class="modal-body">
-                                        <p class="lead">Are you sure you want to remove this system configuration?</p>
-                                </div>
-                                <div class="modal-footer">
-                                        <button type="input" name="macAddress" value="'.$jsonDecode['macAddress'].'" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Yes, Remove It</button>
-					<input type="hidden" name="delete">
-                                        <button type="button" class="btn btn-default btn-icon" data-dismiss="modal"><i class="fa fa-times-circle-o"></i> Cancel</button>
-                                </div>
-                        </form>
-                </div>
-        </div>
-     </div>';
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <form action="allSystems.php" method="get">
+                   <div class="modal-body">
+                     <p class="lead">Are you sure you want to remove this system configuration?</p>
+                   </div>
+                   <div class="modal-footer">
+                     <button type="input" name="macAddress" value="'.$jsonDecode['macAddress'].'" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Yes, Remove It</button>
+                     <input type="hidden" name="delete">
+                     <button type="button" class="btn btn-default btn-icon" data-dismiss="modal"><i class="fa fa-times-circle-o"></i> Cancel</button>
+                   </div>
+                 </form>
+               </div>
+             </div>
+           </div>';
      $row++;
    }
 ?>
   </tbody>
 </table>
 <?php
-  } else {
-	echo '<h3>There are currently no systems to display</h3>';
-  }
-
+} else {
+  echo '<h3>There are currently no systems to display</h3>';
+}
 ?>
 </div>
 <?php
