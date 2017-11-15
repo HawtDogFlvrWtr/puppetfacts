@@ -1,5 +1,5 @@
 # puppetfacts
-puppetfacts is a php framework, wrapped with a bootstrap interface. The framework provices a webservice that can be used to provide fact information for puppet, to automate the installation of a system based on it's MAC address. Because the MAC is used, it can be used to automate a somewhat, baremetal installation, so long as the system has access to call the api. 
+puppetfacts is a php framework, wrapped with a bootstrap interface. The framework provides a webservice that can be used to provide fact information for puppet, to automate the installation of a system based on it's MAC address. Because the MAC is used, it can be used to automate a somewhat, baremetal installation, so long as the system has access to call the api and already has puppet installed. 
 
 ## Table of contents
 * [Setup](#setup)
