@@ -12,7 +12,7 @@ puppetfacts is a php framework, wrapped with a bootstrap interface. The framewor
   * [AddSystem](#addsystem)
   * [AllSystems](#allsystems)
   * [GenerateCreds](#generatecreds)
-  * [API](#API)
+  * [PullApi](#pullapi)
 * [Known Issues and Limitations](#known-issues-and-limitations)
 
 ## Setup
@@ -39,7 +39,7 @@ Upon opening the webservice for the first time, you'll be reminded that you must
 ![AllSystems](/images/all_systems.png)
 ### GenerateCreds
 ![GenerateCreds](/images/generate_creds.png)
-### API
+### PullApi
 ![Api](/images/api_json.png)
 ## Known Issues and Limitations
 * PHP permissions must be set as such, that you're able to create local files, and execute a bash script.
