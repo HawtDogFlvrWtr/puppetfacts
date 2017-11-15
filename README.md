@@ -8,6 +8,11 @@ puppetfacts is a php framework, wrapped with a bootstrap interface. The framewor
   * [Api](#api)
   * [HTML Interface](#html-interface)
 * [Screenshots](#screenshots)
+  * [Home](#home)
+  * [AddSystem](#addsystem)
+  * [AllSystems](#allsystems)
+  * [GenerateCreds](#generatecreds)
+  * [Api](#api)
 * [Known Issues and Limitations](#known-issues-and-limitations)
 
 ## Setup
