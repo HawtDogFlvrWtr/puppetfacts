@@ -12,7 +12,7 @@ puppetfacts is a php framework, wrapped with a bootstrap interface. The framewor
   * [AddSystem](#addsystem)
   * [AllSystems](#allsystems)
   * [GenerateCreds](#generatecreds)
-  * [Api](#api)
+  * [API](#API)
 * [Known Issues and Limitations](#known-issues-and-limitations)
 
 ## Setup
@@ -31,10 +31,15 @@ This will provide a json output, that you can parse as a factor on the puppetize
 ### HTML Interface
 Upon opening the webservice for the first time, you'll be reminded that you must set a default root and recovery user password, to ensure you can access puppetized systems. To do this, use the Generate Credentials page. Once this has been completed, you can begin creating, editing and deleting system configurations via the All Systems, and Add Systems links at the top of the page. 
 ## Screenshots
+### Home
 ![Home](/images/home.png)
+### AddSystem
 ![AddSystem](/images/add_system.png)
+### AllSystems
 ![AllSystems](/images/all_systems.png)
+### GenerateCreds
 ![GenerateCreds](/images/generate_creds.png)
+### API
 ![Api](/images/api_json.png)
 ## Known Issues and Limitations
 * PHP permissions must be set as such, that you're able to create local files, and execute a bash script.
