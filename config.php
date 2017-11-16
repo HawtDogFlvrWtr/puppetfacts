@@ -1,5 +1,12 @@
 <?php
-
+# Add additional facts you want to provide for configuration
+$addFacts = array
+(
+  # Name on page, form info, placeholder
+  # Ex. array("NAMEONWEBPAGE, "FORMVALUENAME", "PLACEHOLDERNAME");
+  #array("Test", "test", "Placeholder"),
+  #array("Test2", "test2", "Placeholder2")
+);
 # Directory Setup
 $systemsDir = 'systems/';
 $credDir = 'credentials/';

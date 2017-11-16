@@ -82,6 +82,20 @@ if (isset($_GET['macAddress'])){
     <div class="form-group col-md-2">
       <label>Netmask (CSV)<input placeholder="nm1,nm2" class="form-control" type="text" name="netmask" value="<?php if (isset($queryArray['netmask'])) { echo $queryArray['netmask']; }?>"></label>
     </div>
+    <?php
+      # Adding additional facts that exist in the config.php
+      $factCount = count($addFacts);
+      for ($row = 0; $row < $factCount; $row++) {
+        if (isset($queryArray[$addFacts[$row][1]])) { 
+          $factValue = $queryArray[$addFacts[$row][1]]; 
+        } else {
+          $factValue = '';
+        }
+        echo '<div class="form-group col-md-2">';
+        echo '  <label>'.$addFacts[$row][0].'<input placeholder="'.$addFacts[$row][2].'" class="form-control" type="text" name="'.$addFacts[$row][1].'" value="'.$factValue.'"></label>';
+        echo '</div>';
+      }
+    ?>
     <div class="form-group col-md-2">
       <label for="role">Role<select class="form-control" name="role" id="role">
       <?php 
