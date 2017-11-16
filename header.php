@@ -4,7 +4,7 @@ $currentPage = basename($_SERVER['PHP_SELF'],'.php');
 if (!file_exists("credentials/default.json")) {
   if ($currentPage == 'generateCreds') {
     $msgBox = "<div class='alert alert-danger' role='alert'>
-                 You have no default credentials configured. This will prevent puppet from running correctly.
+                 You have no default credentials configured. This will prevent puppet from running correctly. If you have already set a default credential, please refresh this page for them to take effect.
                </div>";
   } else {
     $msgBox = "<div class='alert alert-danger' role='alert'>
