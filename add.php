@@ -4,7 +4,7 @@ include 'functions.php';
 #ini_set('display_errors', 1);
 #ini_set('display_startup_errors', 1);
 #error_reporting(E_ALL);
-$queryArray = [];
+$queryArray = array();
 $msgBox = "";
 # Set defaults if they exist
 if ($defaultHostname != '') {
