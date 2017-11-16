@@ -7,8 +7,6 @@ include 'functions.php';
 $queryArray = [];
 $msgBox = "";
 
-# Get possible roles into array
-$roles = file('possible_roles', FILE_IGNORE_NEW_LINES);
 # Generate form information if mac provided
 # input information from form submit
 if (count($_POST) > 0 && $_POST['macAddress']) {
@@ -87,7 +85,7 @@ if (isset($_GET['macAddress'])){
     <div class="form-group col-md-2">
       <label for="role">Role<select class="form-control" name="role" id="role">
       <?php 
-        foreach ($roles as $line_num => $role) {
+        foreach ($possibleRoles as $line_num => $role) {
           if (isset($queryArray['role']) && $role == $queryArray['role']) {
             echo '<option value="'.$role.'" selected>'.$role.'</option>';
           } else {

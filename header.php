@@ -1,4 +1,5 @@
 <?php
+include 'config.php';
 $currentPage = basename($_SERVER['PHP_SELF'],'.php');
 if (!file_exists("credentials/default.json")) {
   if ($currentPage == 'generateCreds') {
@@ -37,7 +38,7 @@ if (!file_exists("credentials/default.json")) {
         <a class="nav-link" href="add.php">Add System <?php if ($currentPage == 'add') { echo '<span class="sr-only">(current)</span>'; } ?></a>
       </li>
       <li class="nav-item <?php if ($currentPage == 'allSystems') { echo 'active'; } ?>">
-        <a class="nav-link" href="allSystems.php">All System <?php if ($currentPage == 'allSystems') { echo '<span class="sr-only">(current)</span>'; }?></a>
+        <a class="nav-link" href="allSystems.php">All Systems <?php if ($currentPage == 'allSystems') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
       <li class="nav-item <?php if ($currentPage == 'generateCreds') { echo 'active'; } ?>">
         <a class="nav-link" href="generateCreds.php">Generate Credentials <?php if ($currentPage == 'generateCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
