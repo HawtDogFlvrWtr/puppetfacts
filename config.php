@@ -2,14 +2,24 @@
 # Add additional facts you want to provide for configuration
 $addFacts = array
 (
-  # Name on page, form info, placeholder
-  # Ex. array("NAMEONWEBPAGE, "FORMVALUENAME", "PLACEHOLDERNAME");
-  #array("Test", "test", "Placeholder"),
-  #array("Test2", "test2", "Placeholder2")
+  # Name on page, form info, placeholder, default value
+  # Ex. array("NAMEONWEBPAGE, "FORMVALUENAME", "PLACEHOLDERNAME", "DEFAULTVALUE");
+  #array("Test", "test", "Placeholder", "value"),
+  #array("Test2", "test2", "Placeholder2", "value2")
 );
 # Directory Setup
 $systemsDir = 'systems/';
 $credDir = 'credentials/';
+
+# Default values you want to populate on the add system dialog
+# This is good if you have settings that generally don't change or are very similair per system
+$defaultDomain = 'ncisdev.ncis.navy.mil';
+$defaultHostname = 'nslvmqvdev';
+$defaultFQDN = $defaultHostname.".".$defaultDomain;
+$defaultNetmask = '255.255.255.0';
+$defaultGateway = '192.168.1.1';
+$defaultDNS = '192.168.1.';
+$defaultIP = '192.168.1.';
 
 # Puppet roles file and the pattern for detecting the roles and provide a global variable $possibleRoles.
 $puppetRoles = '/etc/puppet/manifests/site.pp';

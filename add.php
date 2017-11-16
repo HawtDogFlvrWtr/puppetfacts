@@ -6,6 +6,28 @@ include 'functions.php';
 #error_reporting(E_ALL);
 $queryArray = [];
 $msgBox = "";
+# Set defaults if they exist
+if ($defaultHostname != '') {
+  $queryArray['hostname'] = $defaultHostname;
+}  
+if ($defaultDomain != '') {
+  $queryArray['domain'] = $defaultDomain;
+}  
+if ($defaultFQDN != '') {
+  $queryArray['fqdn'] = $defaultFQDN;
+}  
+if ($defaultNetmask != '') {
+  $queryArray['netmask'] = $defaultNetmask;
+}  
+if ($defaultGateway != '') {
+  $queryArray['gateway'] = $defaultGateway;
+}  
+if ($defaultDNS != '') {
+  $queryArray['dnsAddresses'] = $defaultDNS;
+}  
+if ($defaultIP != '') {
+  $queryArray['ipAddresses'] = $defaultIP;
+}  
 
 # Generate form information if mac provided
 # input information from form submit
@@ -30,6 +52,28 @@ if (isset($_GET['macAddress'])){
     } else {
       $jsonInfo = file_get_contents('systems/'.cleanMac($_GET['macAddress']).".json");
       $queryArray = json_decode($jsonInfo, true);
+      # Set defaults if the information isn't already set, and a default exists
+      if ($queryArray['hostname'] == "") {
+        $queryArray['hostname'] = $defaultHostname;
+      }  
+      if ($queryArray['domain'] == "") {
+        $queryArray['domain'] = $defaultDomain;
+      }  
+      if ($queryArray['fqdn'] == "") {
+        $queryArray['fqdn'] = $defaultFQDN;
+      }  
+      if ($queryArray['netmask'] == "") {
+        $queryArray['netmask'] = $defaultNetmask;
+      }  
+      if ($queryArray['gateway'] == "") {
+        $queryArray['gateway'] = $defaultGateway;
+      }  
+      if ($queryArray['dnsAddresses'] == "") {
+        $queryArray['dnsAddresses'] = $defaultDNS;
+      }  
+      if ($queryArray['ipAddresses'] == "") {
+        $queryArray['ipAddresses'] = $defaultIP;
+      }  
     }
   } else {
     $queryArray['macAddress'] = $_GET['macAddress'];
@@ -86,8 +130,12 @@ if (isset($_GET['macAddress'])){
       # Adding additional facts that exist in the config.php
       $factCount = count($addFacts);
       for ($row = 0; $row < $factCount; $row++) {
+        # Use the previously saved value if it exists
         if (isset($queryArray[$addFacts[$row][1]])) { 
           $factValue = $queryArray[$addFacts[$row][1]]; 
+        # User the default value if one exists and isn't empty
+        } else if (!isset($queryArray[$addFacts[$row][1]]) && $addFacts[$row][3] != ''){
+          $factValue = $addFacts[$row][3];
         } else {
           $factValue = '';
         }
