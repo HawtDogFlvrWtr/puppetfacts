@@ -13,8 +13,8 @@ $credDir = 'credentials/';
 
 # Default values you want to populate on the add system dialog
 # This is good if you have settings that generally don't change or are very similair per system
-$defaultDomain = 'ncisdev.ncis.navy.mil';
-$defaultHostname = 'nslvmqvdev';
+$defaultDomain = 'domain.com';
+$defaultHostname = 'hostname';
 $defaultFQDN = $defaultHostname.".".$defaultDomain;
 $defaultNetmask = '255.255.255.0';
 $defaultGateway = '192.168.1.1';
