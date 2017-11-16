@@ -20,7 +20,6 @@ puppetfacts is a php framework, wrapped with a bootstrap interface. The framewor
 Required:
 * Apache 2.4.X +
 * Php 5.4.16 +
-* Python 2 + (For password hash generation)
 
 To install, simply clone this repository into the folder of your choice, and configure apache to access it. Ensure that all files and folders have the correct permission for apache to write files. For simplicity sake, the web application creates files on disk rather than in a database.
 
@@ -42,5 +41,5 @@ Upon opening the webservice for the first time, you'll be reminded that you must
 ### PullApi
 ![Api](/images/api_json.png)
 ## Known Issues and Limitations
-* PHP permissions must be set as such, that you're able to create local files, and execute a bash script.
-* Currently only works under linux
+* PHP permissions must be set as such, that you're able to create local files.
+* Currently only works under linux. *Now that python requirements have been removed, this may no longer be the case*

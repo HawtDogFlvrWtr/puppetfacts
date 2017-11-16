@@ -1,6 +1,6 @@
 <?php
 include 'header.php';
-include 'footer.php';
+include 'functions.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -13,10 +13,8 @@ $roles = file('possible_roles', FILE_IGNORE_NEW_LINES);
 # input information from form submit
 if (count($_POST) > 0 && isset($_POST['root']) && isset($_POST['recovery']) && isset($_POST['role'])) {
   $role = $_POST['role'];
-  $rootCommand = './passgen.sh '.$_POST['root'];
-  $recoveryCommand = './passgen.sh '.$_POST['recovery'];
-  $_POST['root'] = str_replace("\n", "", shell_exec($rootCommand));
-  $_POST['recovery'] = str_replace("\n", "", shell_exec($recoveryCommand));
+  $_POST['root'] = generateHash(16, $_POST['root']);
+  $_POST['recovery'] = generateHash(16, $_POST['recovery']);
   $jsonConfs = json_encode($_POST, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
   if(file_put_contents('credentials/'.$role.".json", $jsonConfs)) {
     $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>

@@ -11,4 +11,13 @@ function printHelp() {
                To add a system, please provide macAddress, role, ipAddresses, macAddresses, gateway, fqdn, hostname, domain, mountNFS GET information in the url.<br>";
   return $helpInfo;
 }
+function generateHash($saltLength = 16, $passString) {
+  $posCharacters = 'adcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./';
+  $string = '';
+  $max = strlen($posCharacters) - 1;
+  for ($i = 0; $i < $saltLength; $i++) {
+    $string .= $posCharacters[mt_rand(0, $max)];
+  }
+  return crypt($passString, '$6$'.$string); 
+}
 ?>
