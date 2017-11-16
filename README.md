@@ -42,4 +42,4 @@ Upon opening the webservice for the first time, you'll be reminded that you must
 ![Api](/images/api_json.png)
 ## Known Issues and Limitations
 * PHP permissions must be set as such, that you're able to create local files.
-* Currently only works under linux. *Now that python requirements have been removed, this may no longer be the case*
+* Currently only works under linux. (*Now that python requirements have been removed, this may no longer be the case*)
