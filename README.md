@@ -21,7 +21,7 @@ Required:
 * Apache 2.4.X +
 * Php 5.4.16 +
 
-To install, simply clone this repository into the folder of your choice, and configure apache to access it. Ensure that all files and folders have the correct permission for apache to write files. For simplicity sake, the web application creates files on disk rather than in a database.
+To install, simply clone this repository into the folder of your choice, create a credentials, and systems folder with permissions for your apache service to access them, and configure apache to access it. Ensure that all files and folders have the correct permission for apache to write files. For simplicity sake, the web application creates files on disk rather than in a database.
 
 ## Usage
 ### Api
