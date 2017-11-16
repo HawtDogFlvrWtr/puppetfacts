@@ -1,8 +1,6 @@
 <?php
   include 'header.php';
 ?>
-<div class="container" style="padding-bottom:20px;">
-</div>
 
 <div class="container rounded border bg-light">
   <h1>Puppet Facts</h1>
