@@ -28,11 +28,11 @@ if (isset($_GET["macAddress"])) {
     if (file_exists("credentials/".$role.".json")) {
       $getCredJson = file_get_contents("credentials/".$role.".json");
       $credJsonArray = json_decode($getCredJson, true);
-      $jsonArrayBase = array_merge($jsonArrayBase, $credJsonArray);
+      $jsonArrayBase = array_merge($credJsonArray, $jsonArrayBase);
     } else if (file_exists("credentials/default.json")) {
       $getCredJson = file_get_contents("credentials/default.json");
       $credJsonArray = json_decode($getCredJson, true);
-      $jsonArrayBase = array_merge($jsonArrayBase, $credJsonArray);
+      $jsonArrayBase = array_merge($credJsonArray, $jsonArrayBase);
     }
     header('Content-Type: application/json');
     echo json_encode($jsonArrayBase, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
