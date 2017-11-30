@@ -33,7 +33,7 @@ if ($defaultIP != '') {
 # input information from form submit
 if (count($_POST) > 0 && $_POST['macAddress']) {
   $_POST['macAddress'] = strtoupper($_POST['macAddress']);
-  $jsonConfs = json_encode($_POST, JSON_PRETTY_PRINT);
+  $jsonConfs = json_encode($_POST);
   $macAddress = $_POST["macAddress"];
     if(file_put_contents('systems/'.cleanMac($macAddress).".json", $jsonConfs)) {
       $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>System information saved. <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";

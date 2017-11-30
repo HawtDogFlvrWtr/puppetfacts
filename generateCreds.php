@@ -13,7 +13,7 @@ if (count($_POST) > 0 && isset($_POST['root']) && isset($_POST['recovery']) && i
   $role = $_POST['role'];
   $_POST['root'] = generateHash(16, $_POST['root']);
   $_POST['recovery'] = generateHash(16, $_POST['recovery']);
-  $jsonConfs = json_encode($_POST, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+  $jsonConfs = stripslashes(json_encode($_POST));
   if(file_put_contents('credentials/'.$role.".json", $jsonConfs)) {
     $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
                  Credentials for ".$_POST['role']." saved.

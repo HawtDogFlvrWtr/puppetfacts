@@ -14,7 +14,7 @@ function cleanMac($macAddress) {
 # Generate form information if mac provided
 # input information from form submit
 if (count($_POST) > 0 && $_POST['macAddress']) {
-  $jsonConfs = json_encode($_POST, JSON_PRETTY_PRINT);
+  $jsonConfs = json_encode($_POST);
   $macAddress = $_POST["macAddress"];
   file_put_contents(cleanMac($macAddress).".json", $jsonConfs);
   $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>

@@ -6,7 +6,7 @@ include 'functions.php';
 $credFiles = glob('credentials/*.{json}', GLOB_BRACE);
 # input information from form submit
 if (count($_POST) > 0 && $_POST['macAddress']) {
-  $jsonConfs = json_encode($_POST, JSON_PRETTY_PRINT);
+  $jsonConfs = json_encode($_POST);
   $macAddress = strtoupper($_POST["macAddress"]);
   $cleanMac = str_replace(":", "", $macAddress);
   file_put_contents($cleanMac.".json", $jsonConfs);
@@ -17,7 +17,7 @@ if (isset($_GET["macAddress"])) {
   $macAddress = strtoupper($_GET["macAddress"]);
   $cleanMac = str_replace(":", "", $_GET["macAddress"]);
   $addProps = getAdditionals();
-  $jsonConfs = json_encode($addProps, JSON_PRETTY_PRINT);
+  $jsonConfs = json_encode($addProps);
   # Open new file if it doesn't exists, removing the colon's from the file name
   if (file_exists("systems/".$cleanMac.".json") && count($addProps) <= 1){
     $fileContent = file_get_contents("systems/".$cleanMac.".json", true);
@@ -35,7 +35,7 @@ if (isset($_GET["macAddress"])) {
       $jsonArrayBase = array_merge($credJsonArray, $jsonArrayBase);
     }
     header('Content-Type: application/json');
-    echo json_encode($jsonArrayBase, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    echo stripslashes(json_encode($jsonArrayBase));
   } else {
     echo "This systems configuration doesn't exist.<br>";
     echo printHelp();
