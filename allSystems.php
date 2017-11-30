@@ -46,11 +46,10 @@ if (count($files) > 0) {
   <thead>
     <tr>
       <th scope="col">Hostname</th>
+      <th scope="col">Role</th>
+      <th scope="col">Password Role</th>
       <th scope="col">MAC</th>
       <th scope="col">IPAddresses</th>
-      <th scope="col">DNSAddresses</th>
-      <th scope="col">Gateway</th>
-      <th scope="col">Netmask</th>
       <th scope="col">Options</th>
     </tr>
   </thead>
@@ -59,12 +58,17 @@ if (count($files) > 0) {
    foreach($files as $file) {
      $jsonDecode = json_decode(file_get_contents($file), true);
      echo '<tr>';
-     echo '<td>'.$jsonDecode['hostname'].'</th>';
-     echo '<td>'.$jsonDecode['macAddress'].'</th>';
-     echo '<td>'.$jsonDecode['ipAddresses'].'</th>';
-     echo '<td>'.$jsonDecode['dnsAddresses'].'</th>';
-     echo '<td>'.$jsonDecode['gateway'].'</th>';
-     echo '<td>'.$jsonDecode['netmask'].'</th>';
+     echo '<td>'.$jsonDecode['hostname'].'</td>';
+     echo '<td>'.$jsonDecode['role'].'</td>';
+     if (file_exists("credentials/".$jsonDecode['role'].".json")) {
+       echo '<td>'.$jsonDecode['role'].'</td>';
+     } else if (file_exists("credentials/default.json")) {
+       echo '<td>default</td>';
+     } else {
+       echo '<td style="color:red;">NOT SET</td>';
+     }
+     echo '<td>'.$jsonDecode['macAddress'].'</td>';
+     echo '<td>'.$jsonDecode['ipAddresses'].'</td>';
      echo '<td>
 	<a class="btn btn-warning btn-icon" href="add.php?macAddress='.$jsonDecode['macAddress'].'">Edit</a>
 	<a data-toggle="modal" href="#delete'.$row.'" class="btn btn-danger btn-icon" data-dismiss="modal"><i class="fa fa-ban"></i>Delete</a>
