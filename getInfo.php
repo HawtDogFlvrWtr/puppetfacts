@@ -40,6 +40,18 @@ if (isset($_GET["macAddress"])) {
     echo "This systems configuration doesn't exist.<br>";
     echo printHelp();
   }
+} else if (isset($_GET["username"])) {
+  # Get username 
+  $username = $_GET["username"];
+  # Open new file if it doesn't exists, removing the colon's from the file name
+  if (file_exists("usercreds/".$username.".json") && count($addProps) <= 1){
+    $fileContent = file_get_contents("usercreds/".$username.".json", true);
+    header('Content-Type: application/json');
+    echo stripslashes($fileContent);
+  } else {
+    echo "This user doesn't exist.<br>";
+    echo printHelp();
+  }
 } else {
   echo printHelp();
 }

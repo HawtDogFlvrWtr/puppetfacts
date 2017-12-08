@@ -8,7 +8,7 @@ if (!file_exists("credentials/default.json")) {
                </div>";
   } else {
     $msgBox = "<div class='alert alert-danger' role='alert'>
-                 You have no default credentials configured. This will prevent puppet from running correctly. Please set one by clicking <a href='generateCreds.php'>Generate Credentials</a> above.
+                 You have no default credentials configured. This will prevent puppet from running correctly. Please set one by clicking <a href='generateCreds.php'>Role Credentials</a> above.
                </div>";
   }
 }
@@ -40,8 +40,14 @@ if (!file_exists("credentials/default.json")) {
       <li class="nav-item <?php if ($currentPage == 'allSystems') { echo 'active'; } ?>">
         <a class="nav-link" href="allSystems.php">All Systems <?php if ($currentPage == 'allSystems') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
+      <li class="nav-item <?php if ($currentPage == 'allUsers') { echo 'active'; } ?>">
+        <a class="nav-link" href="allUsers.php">All Users <?php if ($currentPage == 'allUsers') { echo '<span class="sr-only">(current)</span>'; }?></a>
+      </li>
       <li class="nav-item <?php if ($currentPage == 'generateCreds') { echo 'active'; } ?>">
-        <a class="nav-link" href="generateCreds.php">Generate Credentials <?php if ($currentPage == 'generateCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
+        <a class="nav-link" href="generateCreds.php">Role Credentials <?php if ($currentPage == 'generateCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
+      </li>
+      <li class="nav-item <?php if ($currentPage == 'userCreds') { echo 'active'; } ?>">
+        <a class="nav-link" href="userCreds.php">User Credentials <?php if ($currentPage == 'userCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" method="get" action="add.php">

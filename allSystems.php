@@ -45,12 +45,12 @@ if (count($files) > 0) {
 <table class="table">
   <thead>
     <tr>
+      <th scope="col">Options</th>
       <th scope="col">Hostname</th>
       <th scope="col">Role</th>
       <th scope="col">Password Role</th>
       <th scope="col">MAC</th>
       <th scope="col">IPAddresses</th>
-      <th scope="col">Options</th>
     </tr>
   </thead>
   <tbody>
@@ -58,6 +58,11 @@ if (count($files) > 0) {
    foreach($files as $file) {
      $jsonDecode = json_decode(file_get_contents($file), true);
      echo '<tr>';
+     echo '<td>
+	<a class="btn btn-warning btn-icon" href="add.php?macAddress='.$jsonDecode['macAddress'].'">Edit</a>
+	<a data-toggle="modal" href="#delete'.$row.'" class="btn btn-danger btn-icon" data-dismiss="modal"><i class="fa fa-ban"></i>Delete</a>
+	<a target="_blank" href="getInfo.php?macAddress='.$jsonDecode['macAddress'].'" class="btn btn-success btn-icon">JSON</a>
+	  </td>';
      echo '<td>'.$jsonDecode['hostname'].'</td>';
      echo '<td>'.$jsonDecode['role'].'</td>';
      if (file_exists("credentials/".$jsonDecode['role'].".json")) {
@@ -69,11 +74,6 @@ if (count($files) > 0) {
      }
      echo '<td>'.$jsonDecode['macAddress'].'</td>';
      echo '<td>'.$jsonDecode['ipAddresses'].'</td>';
-     echo '<td>
-	<a class="btn btn-warning btn-icon" href="add.php?macAddress='.$jsonDecode['macAddress'].'">Edit</a>
-	<a data-toggle="modal" href="#delete'.$row.'" class="btn btn-danger btn-icon" data-dismiss="modal"><i class="fa fa-ban"></i>Delete</a>
-	<a target="_blank" href="getInfo.php?macAddress='.$jsonDecode['macAddress'].'" class="btn btn-success btn-icon">JSON</a>
-	  </td>';
      echo '</tr>';
      echo '<div id="delete'.$row.'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
              <div class="modal-dialog">

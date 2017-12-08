@@ -132,7 +132,14 @@ if ($msgBox != "") {
   <div class="border rounded-left bg-light col-md-10">
     <h1>User Credentials</h1>
     <p>This page allows you to generate NEW credentials per user. To set specific credentials for a user, type the username and password that you would like. If you have  your PKI certificate also, you can include that when saving. Please note, that the passwords are stored in a SHA512 format, and cannot be reversed. Because of this, we provide no way of viewing the current passwords.</p>
-    <form method="post" action="userCreds.php?username=<?php echo $_GET['username'];?>"> 
+        <?php 
+         if (isset($queryArray['username'])) {
+           $urlGet = "?username=".$queryArray['username'];
+         } else {
+           $urlGet = "";
+         }
+        ?>
+    <form method="post" action="userCreds.php<?php echo $urlGet;?>"> 
     <div class="form-row">
       <?php if (isset($_GET['username'])) {?>
       <div class="form-group col-md-12">
@@ -143,7 +150,14 @@ if ($msgBox != "") {
     </div>
     <div class="form-row">
       <div class="form-group col-md-2">
-        <label>Username<input placeholder="Username" class="form-control" type="text" id="username" name="username" value="<?php if (isset($queryArray['username'])) { echo $queryArray['username']; }?>"></label>
+        <?php 
+         if (isset($queryArray['username'])) {
+           $readonly = "readonly";
+         } else {
+           $readonly = "";
+         }
+        ?>
+        <label>Username<input <?php echo $readonly; ?> placeholder="Username" class="form-control" type="text" id="username" name="username" value="<?php if (isset($queryArray['username'])) { echo $queryArray['username']; }?>"></label>
       </div>
       <div class="form-group col-md-2">
         <label>New Password<input placeholder="Password" class="form-control" type="text" id="password" name="password" value=""></label>

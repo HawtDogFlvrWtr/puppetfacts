@@ -77,7 +77,7 @@ if ($msgBox != "") {
 <div class="container">
   <div class="row">
   <div class="border rounded-left bg-light col-md-10">
-    <h1>Generate Credentials</h1>
+    <h1>Role Credentials</h1>
     <p>This page allows you to generate credentials per role, or at the default level. To set specific root credentials for a role, select it and enter the credentials you would like to use. For All other systems that use the default root and recovery user passwords, select "default" as the role. Please note, that the passwords are stored in a SHA512 format, and cannot be reversed. Because of this, we provide no way of viewing the current passwords.</p>
     <form method="post" action="generateCreds.php"> 
     <div class="form-row">
