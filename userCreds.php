@@ -122,7 +122,7 @@ if (isset($_GET['username'])){
   } else {
     $queryArray['username'] = $_GET['username'];
     $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
-                 This system doesn't have configuration information. You can add it below.
+                 This user doesn't have configuration information. You can add it below.
                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                      <span aria-hidden='true'>&times;</span>
                    </button>
