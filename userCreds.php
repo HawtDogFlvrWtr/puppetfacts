@@ -202,7 +202,7 @@ if ($msgBox != "") {
       </ul>
     <?php
       } else {
-        echo '<p class="text-left">There are none set</p>';
+        echo '<p class="text-left">There are no users</p>';
       }
     ?>
   </div>
