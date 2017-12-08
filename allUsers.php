@@ -45,10 +45,10 @@ if (count($files) > 0) {
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Options</th>
       <th scope="col">Username</th>
       <th scope="col">Password</th>
       <th scope="col">Certificate</th>
+      <th scope="col">Options</th>
     </tr>
   </thead>
   <tbody>
@@ -66,14 +66,14 @@ if (count($files) > 0) {
        $passOut = "<b style='color:red;'>UNSET</b>";
      }
      echo '<tr>';
+     echo '<td>'.$jsonDecode['username'].'</td>';
+     echo '<td>'.$passOut.'</td>';
+     echo '<td>'.$pkiOut.'</td>';
      echo '<td>
 	<a class="btn btn-warning btn-icon" href="userCreds.php?username='.$jsonDecode['username'].'">Edit</a>
 	<a data-toggle="modal" href="#delete'.$row.'" class="btn btn-danger btn-icon" data-dismiss="modal"><i class="fa fa-ban"></i>Delete</a>
 	<a target="_blank" href="getInfo.php?username='.$jsonDecode['username'].'" class="btn btn-success btn-icon">JSON</a>
 	  </td>';
-     echo '<td>'.$jsonDecode['username'].'</td>';
-     echo '<td>'.$passOut.'</td>';
-     echo '<td>'.$pkiOut.'</td>';
      echo '</tr>';
      echo '<div id="delete'.$row.'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
              <div class="modal-dialog">

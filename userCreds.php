@@ -11,6 +11,7 @@ $msgBox = "";
 # input information from form submit
 if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['cpassword']) && isset($_POST['pki']) && isset($_POST['opassword'])) {
   if ( $_POST['password'] === $_POST['cpassword'] ) {
+    unset($_POST['cpassword']);
     # Checking saved password vs user submitted old password
     $checkUser = checkUser($_POST['opassword'], $_POST['username']);
     if ($checkUser == 0) {
@@ -18,6 +19,7 @@ if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) 
       $pkiDirty = explode(' ', $_POST['pki']);
       $_POST['pki'] = $pkiDirty[0]." ".$pkiDirty[1];
       $_POST['password'] = generateHash(16, $_POST['password']);
+      unset($_POST['opassword']);
       $jsonConfs = json_encode($_POST);
       if(file_put_contents('usercreds/'.$username.".json", $jsonConfs)) {
         $msgBox = "<div class='alert alert-success alert-dismissible fade show' username='alert'>
@@ -62,27 +64,37 @@ if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) 
                    </div>";
   }
 } else if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['pki'])) {
-  $username = $_POST['username'];
-  $pkiDirty = explode(' ', $_POST['pki']);
-  $_POST['pki'] = $pkiDirty[0]." ".$pkiDirty[1];
-  $_POST['password'] = generateHash(16, $_POST['password']);
-  $jsonConfs = json_encode($_POST);
-  if(file_put_contents('usercreds/'.$username.".json", $jsonConfs)) {
-    $msgBox = "<div class='alert alert-success alert-dismissible fade show' username='alert'>
-                 Credentials for ".$_POST['username']." saved.
-                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                   <span aria-hidden='true'>&times;</span>
-                 </button>
-               </div>";
+  if ( $_POST['password'] === $_POST['cpassword'] ) {
+    unset($_POST['cpassword']);
+    $username = $_POST['username'];
+    $pkiDirty = explode(' ', $_POST['pki']);
+    $_POST['pki'] = $pkiDirty[0]." ".$pkiDirty[1];
+    $_POST['password'] = generateHash(16, $_POST['password']);
+    $jsonConfs = json_encode($_POST);
+    if(file_put_contents('usercreds/'.$username.".json", $jsonConfs)) {
+      $msgBox = "<div class='alert alert-success alert-dismissible fade show' username='alert'>
+                   Credentials for ".$_POST['username']." saved.
+                   <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                     <span aria-hidden='true'>&times;</span>
+                   </button>
+                 </div>";
+    } else {
+      $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
+                   Credentials for ".$_POST['username']." not saved. Are you trying to be naughty?
+                   <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                     <span aria-hidden='true'>&times;</span>
+                   </button>
+                 </div>";
+    }
+    $_POST = array();
   } else {
-    $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
-                 Credentials for ".$_POST['username']." not saved. Are you trying to be naughty?
-                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                   <span aria-hidden='true'>&times;</span>
-                 </button>
-               </div>";
+        $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
+                     Your new passwords didn't match. Please try again. 
+                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                       <span aria-hidden='true'>&times;</span>
+                     </button>
+                   </div>";
   }
-  $_POST = array();
 }
 if (isset($_GET['username'])){
   $username = $_GET['username'];
