@@ -36,7 +36,7 @@ if ($msgBox != "") {
   echo '</div>';
 }
 ?>
-<div class="container border rounded bg-light">
+<div style="min-height:150px;" class="container border rounded bg-light">
 <h1>All Systems</h1>
 <p>These are the current systems that you have configuration information for. You can edit or delete any record.</p>
 <?php 
@@ -98,7 +98,7 @@ if (count($files) > 0) {
 </table>
 <?php
 } else {
-  echo '<h3>There are currently no systems to display</h3>';
+  echo '<h3><em>There are currently no systems to display</em></h3>';
 }
 ?>
 </div>
