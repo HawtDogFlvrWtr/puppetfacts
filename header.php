@@ -1,5 +1,14 @@
 <?php
 include 'config.php';
+# Start session across pages
+session_start();
+# redirect if not logged in, or if logging out.
+if (!isset($_SESSION['login_user']) OR isset($_GET['logout'])) {
+  unset($_SESSION['login_user']);
+  header("Location: login.php");
+  die();
+}
+
 $currentPage = basename($_SERVER['PHP_SELF'],'.php');
 if (!file_exists("credentials/default.json")) {
   if ($currentPage == 'generateCreds') {
@@ -17,6 +26,7 @@ if (!file_exists("credentials/default.json")) {
   <head>
     <title>Host configuration</title>
     <link rel="stylesheet" type="text/css" href='css/bootstrap.min.css'>
+    <link rel="stylesheet" type="text/css" href='css/fontawesome-all.min.css'>
     <style>
       label{display:inline-block;}
       input, select{display:block;}
@@ -35,28 +45,36 @@ if (!file_exists("credentials/default.json")) {
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item <?php if ($currentPage == 'add') { echo 'active'; } ?>">
-        <a class="nav-link" href="add.php">Add System <?php if ($currentPage == 'add') { echo '<span class="sr-only">(current)</span>'; } ?></a>
+        <a style="margin-left:5px;" class="btn btn-success  btn-sm" href="add.php"><i class="fa fa-plus"></i> Add System <?php if ($currentPage == 'add') { echo '<span class="sr-only">(current)</span>'; } ?></a>
       </li>
       <li class="nav-item <?php if ($currentPage == 'allSystems') { echo 'active'; } ?>">
-        <a class="nav-link" href="allSystems.php">All Systems <?php if ($currentPage == 'allSystems') { echo '<span class="sr-only">(current)</span>'; }?></a>
-      </li>
-      <li class="nav-item <?php if ($currentPage == 'allUsers') { echo 'active'; } ?>">
-        <a class="nav-link" href="allUsers.php">All Users <?php if ($currentPage == 'allUsers') { echo '<span class="sr-only">(current)</span>'; }?></a>
-      </li>
-      <li class="nav-item <?php if ($currentPage == 'generateCreds') { echo 'active'; } ?>">
-        <a class="nav-link" href="generateCreds.php">Role Credentials <?php if ($currentPage == 'generateCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
+        <a style="margin-left:5px;" class="btn btn-success  btn-sm" href="allSystems.php"><i class="fa fa-desktop"></i> All Systems <?php if ($currentPage == 'allSystems') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
       <li class="nav-item <?php if ($currentPage == 'userCreds') { echo 'active'; } ?>">
-        <a class="nav-link" href="userCreds.php">User Credentials <?php if ($currentPage == 'userCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
+        <a style="margin-left:5px;" class="btn btn-success  btn-sm" href="userCreds.php"><i class="fa fa-user-plus"></i> Add User <?php if ($currentPage == 'userCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
+      </li>
+      <li class="nav-item <?php if ($currentPage == 'allUsers') { echo 'active'; } ?>">
+        <a style="margin-left:5px;" class="btn btn-success  btn-sm" href="allUsers.php"><i class="fa fa-users"></i> All Users <?php if ($currentPage == 'allUsers') { echo '<span class="sr-only">(current)</span>'; }?></a>
+      </li>
+      <li class="nav-item <?php if ($currentPage == 'generateCreds') { echo 'active'; } ?>">
+        <a style="margin-left:5px;" class="btn btn-success  btn-sm" href="generateCreds.php"><i class="fa fa-unlock-alt"></i> Role Credentials <?php if ($currentPage == 'generateCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0" method="get" action="add.php">
-      <input class="form-control mr-sm-2" id="macAddress" name="macAddress" type="search" placeholder="Search MAC" aria-label="Search">
-        <button class="btn btn-outlline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <ul class="navbar-nav">
+      <li class="nav-item active" >
+        <a style="margin-left:5px;" class="btn btn-danger  btn-sm" href="index.php?logout"><i class="fa fa-sign-out-alt"></i> Log Out</a>
+      </li>
+    </ul>
   </div>
 </nav>
+  <div style="margin-top:15px;" class="col-md-12">
+    <form class="form-inline my-2 my-lg-0" method="get" action="add.php">
+      <input class="form-control col-md-11" id="macAddress" name="macAddress" type="search" placeholder="Search for a MAC Address" aria-label="Search">
+        <button style="margin-left:2px;" class="btn btn-outlline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
 </div>
+
 <?php
 if ($msgBox != "") {
   echo '<div class="container">';

@@ -16,11 +16,13 @@ if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) 
     $checkUser = checkUser($_POST['opassword'], $_POST['username']);
     if ($checkUser == 0) {
       $username = $_POST['username'];
-      $pkiDirty = explode(' ', $_POST['pki']);
-      $_POST['pki'] = $pkiDirty[0]." ".$pkiDirty[1];
+      if ($_POST['pki'] != '') {
+        $pkiDirty = explode(' ', $_POST['pki']);
+        $_POST['pki'] = $pkiDirty[0]." ".$pkiDirty[1];
+      }
       $_POST['password'] = generateHash(16, $_POST['password']);
       unset($_POST['opassword']);
-      $jsonConfs = json_encode($_POST);
+      $jsonConfs = stripslashes(json_encode($_POST));
       if(file_put_contents('usercreds/'.$username.".json", $jsonConfs)) {
         $msgBox = "<div class='alert alert-success alert-dismissible fade show' username='alert'>
                      Credentials for ".$_POST['username']." saved.
@@ -67,10 +69,12 @@ if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) 
   if ( $_POST['password'] === $_POST['cpassword'] ) {
     unset($_POST['cpassword']);
     $username = $_POST['username'];
-    $pkiDirty = explode(' ', $_POST['pki']);
-    $_POST['pki'] = $pkiDirty[0]." ".$pkiDirty[1];
+    if ($_POST['pki'] != '') {
+      $pkiDirty = explode(' ', $_POST['pki']);
+      $_POST['pki'] = $pkiDirty[0]." ".$pkiDirty[1];
+    }
     $_POST['password'] = generateHash(16, $_POST['password']);
-    $jsonConfs = json_encode($_POST);
+    $jsonConfs = stripslashes(json_encode($_POST));
     if(file_put_contents('usercreds/'.$username.".json", $jsonConfs)) {
       $msgBox = "<div class='alert alert-success alert-dismissible fade show' username='alert'>
                    Credentials for ".$_POST['username']." saved.
@@ -180,7 +184,7 @@ if ($msgBox != "") {
     </div>
     <div class="form-row">
       <div class="form-group col-md-2">
-        <label>Certificate String<textarea rows="8" cols="120" id="pki" name="pki" placeholder="PKI String"><?php if (isset($queryArray['pki'])) { echo $queryArray['pki']; }?></textarea></label>
+        <label>Certificate String<textarea rows="8" cols="100" id="pki" name="pki" placeholder="PKI String"><?php if (isset($queryArray['pki'])) { echo $queryArray['pki']; }?></textarea></label>
       </div>
     </div>
     <input type="submit" name="" value="Submit">
