@@ -17,6 +17,12 @@ if (isset($_GET['username'])){
                        <span aria-hidden='true'>&times;</span>
                      </button>
                    </div>";
+        # Check and log out if the current user was deleted
+        if (isset($_SESSION['login_user']) && $_SESSION['login_user'] === $_GET['username']) {
+          unset($_SESSION['login_user']);
+          header("Location: login.php");
+          die();
+        }
       } else {
         $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                      ".$_GET['username']." wasn't deleted. Please try again.
