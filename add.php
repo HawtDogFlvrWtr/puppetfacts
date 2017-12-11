@@ -1,6 +1,5 @@
 <?php
 include 'header.php';
-include 'functions.php';
 #ini_set('display_errors', 1);
 #ini_set('display_startup_errors', 1);
 #error_reporting(E_ALL);
@@ -35,22 +34,22 @@ if (count($_POST) > 0 && $_POST['macAddress']) {
   $_POST['macAddress'] = strtoupper($_POST['macAddress']);
   $jsonConfs = json_encode($_POST);
   $macAddress = $_POST["macAddress"];
-    if(file_put_contents('systems/'.cleanMac($macAddress).".json", $jsonConfs)) {
+    if(file_put_contents($systemsDir.cleanMac($macAddress).".json", $jsonConfs)) {
       $msgBox = msgBox("System information saved.", "success");
     } else {
       $msgBox = msgBox("System information NOT saved. Are you trying to be naughty?", "danger");
     }
 }
 if (isset($_GET['macAddress'])){
-  if (file_exists('systems/'.cleanMac($_GET['macAddress']).".json")) {
+  if (file_exists($systemsDir.cleanMac($_GET['macAddress']).".json")) {
     if ( isset($_GET['delete'])) {
-      if (unlink('systems/'.cleanMac($_GET['macAddress']).".json")) {
+      if (unlink($systemsDir.cleanMac($_GET['macAddress']).".json")) {
         $msgBox = msgBox("This system configuration was deleted.", "success");
       } else {
         $msgBox = msgBox("This system configuration was NOT deleted. Please try again.", "danger");
       }
     } else {
-      $jsonInfo = file_get_contents('systems/'.cleanMac($_GET['macAddress']).".json");
+      $jsonInfo = file_get_contents($systemsDir.cleanMac($_GET['macAddress']).".json");
       $queryArray = json_decode($jsonInfo, true);
       # Set defaults if the information isn't already set, and a default exists
       if ($queryArray['hostname'] == "") {

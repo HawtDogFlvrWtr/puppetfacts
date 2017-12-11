@@ -1,6 +1,5 @@
 <?php 
 include 'header.php';
-include 'functions.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -8,28 +7,18 @@ $row = 1;
 $msgBox = '';
 # Delete Record
 if (isset($_GET['macAddress'])){
-  if (file_exists('systems/'.cleanMac($_GET['macAddress']).".json")) {
+  if (file_exists($systemsDir.cleanMac($_GET['macAddress']).".json")) {
     if ( isset($_GET['delete'])) {
-      if (unlink('systems/'.cleanMac($_GET['macAddress']).".json")) {
-        $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                     This system configuration was deleted.
-                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                       <span aria-hidden='true'>&times;</span>
-                     </button>
-                   </div>";
+      if (unlink($systemsDir.cleanMac($_GET['macAddress']).".json")) {
+        $msgBox = msgBox("This system configuration was deleted.", "success");
       } else {
-        $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                     This system configuration wasn't deleted. Please try again.
-                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                       <span aria-hidden='true'>&times;</span>
-                     </button>
-                   </div>";
+        $msgBox = msgBox("This system configuration wasn't deleted. Please try again.", "danger");
       }
     }
   }
 }
 # Get list of systems, This after the delete statement above, so it updates the page on post.
-$files = glob('systems/*.{json}', GLOB_BRACE);
+$files = glob($systemsDir.'*.{json}', GLOB_BRACE);
 if ($msgBox != "") {
   echo '<div class="red-text container">';
   echo $msgBox;
@@ -60,9 +49,9 @@ if (count($files) > 0) {
      echo '<tr>';
      echo '<td>'.$jsonDecode['hostname'].'</td>';
      echo '<td>'.$jsonDecode['role'].'</td>';
-     if (file_exists("credentials/".$jsonDecode['role'].".json")) {
+     if (file_exists($credDir.$jsonDecode['role'].".json")) {
        echo '<td>'.$jsonDecode['role'].'</td>';
-     } else if (file_exists("credentials/default.json")) {
+     } else if (file_exists($credDir."default.json")) {
        echo '<td>default</td>';
      } else {
        echo '<td class="red-text">NOT SET</td>';

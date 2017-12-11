@@ -1,5 +1,7 @@
 <?php
 include 'config.php';
+include 'functions.php';
+
 # Start session across pages
 session_start();
 # redirect if not logged in, or if logging out.
@@ -10,15 +12,11 @@ if (!isset($_SESSION['login_user']) OR isset($_GET['logout'])) {
 }
 
 $currentPage = basename($_SERVER['PHP_SELF'],'.php');
-if (!file_exists("credentials/default.json")) {
+if (!file_exists($credDir."default.json")) {
   if ($currentPage == 'generateCreds') {
-    $msgBox = "<div class='alert alert-danger' role='alert'>
-                 You have no default credentials configured. This will prevent puppet from running correctly. If you have already set a default credential, please refresh this page for them to take effect.
-               </div>";
+    $msgBox = msgBox("You have no default credentials configured. This will prevent puppet from running correctly. If you have already set a default credential, please refresh this page for them to take effect.", "danger");
   } else {
-    $msgBox = "<div class='alert alert-danger' role='alert'>
-                 You have no default credentials configured. This will prevent puppet from running correctly. Please set one by clicking <a href='generateCreds.php'>Role Credentials</a> above.
-               </div>";
+    $msgBox = msgBox("You have no default credentials configured. This will prevent puppet from running correctly. Please set one by clicking <a href='generateCreds.php'>Role Credentials</a> above.", "warning");
   }
 }
 ?>

@@ -1,4 +1,5 @@
 <?php
+
 function cleanMac($macAddress) {
   return strtoupper(str_replace(":", "", $macAddress));
 }
@@ -36,9 +37,9 @@ function msgBox($message, $type) {
   return $msgBox;
 }
 
-function checkUser($currentPassString, $userName) {
-  if (file_exists('usercreds/'.$userName.'.json')) {
-    $userCreds = file_get_contents('usercreds/'.$userName.'.json');
+function checkUser($currentPassString, $userName, $usersDir) {
+  if (file_exists($usersDir.$userName.'.json')) {
+    $userCreds = file_get_contents($usersDir.$userName.'.json');
     $decodeUser = json_decode($userCreds, true);
     $splitPasswd = explode('$', $decodeUser['password']);
     $verifyKey = generateHash(strlen($splitPasswd[2]), $currentPassString, $splitPasswd[2]);

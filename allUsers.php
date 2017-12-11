@@ -1,6 +1,5 @@
 <?php 
 include 'header.php';
-include 'functions.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -8,9 +7,9 @@ $row = 1;
 $msgBox = '';
 # Delete Record
 if (isset($_GET['username'])){
-  if (file_exists('usercreds/'.$_GET['username'].".json")) {
+  if (file_exists($usersDir.$_GET['username'].".json")) {
     if ( isset($_GET['delete'])) {
-      if (unlink('usercreds/'.$_GET['username'].".json")) {
+      if (unlink($usersDir.$_GET['username'].".json")) {
         $msgBox = msgBox($_GET['username']." deleted", "success");
         # Check and log out if the current user was deleted
         if (isset($_SESSION['login_user']) && $_SESSION['login_user'] === $_GET['username']) {
@@ -25,7 +24,7 @@ if (isset($_GET['username'])){
   }
 }
 # Get list of systems, This after the delete statement above, so it updates the page on post.
-$files = glob('usercreds/*.{json}', GLOB_BRACE);
+$files = glob($usersDir.'*.{json}', GLOB_BRACE);
 if ($msgBox != "") {
   echo '<div class="red-text container">';
   echo $msgBox;

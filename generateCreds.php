@@ -1,6 +1,5 @@
 <?php
 include 'header.php';
-include 'functions.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -14,7 +13,7 @@ if (count($_POST) > 0 && isset($_POST['root']) && isset($_POST['recovery']) && i
   $_POST['root'] = generateHash(16, $_POST['root']);
   $_POST['recovery'] = generateHash(16, $_POST['recovery']);
   $jsonConfs = stripslashes(json_encode($_POST));
-  if(file_put_contents('credentials/'.$role.".json", $jsonConfs)) {
+  if(file_put_contents($credDir.$role.".json", $jsonConfs)) {
     $msgBox = msgBox("Credentials for ".$_POST['role']." saved.", "success");
   } else {
     $msgBox = msgBox("Credentials for ".$_POST['role']." not saved. Are you trying to be naughty?", "danger");
@@ -23,8 +22,8 @@ if (count($_POST) > 0 && isset($_POST['root']) && isset($_POST['recovery']) && i
 }
 if (isset($_GET['role']) && isset($_GET['delete'])){
   $role = $_GET['role'];
-  if (file_exists('credentials/'.$role.".json")) {
-    if (unlink('credentials/'.$role.".json")) {
+  if (file_exists($credDir.$role.".json")) {
+    if (unlink($credDir.$role.".json")) {
       $msgBox = msgBox("This credential was deleted.", "success");
     } else {
       $msgBox = msgBox("This credential wasn't deleted. Please try again.", "danger");
@@ -34,8 +33,8 @@ if (isset($_GET['role']) && isset($_GET['delete'])){
   }
 } else if (isset($_GET['role'])){
   $role = $_GET['role'];
-  if (file_exists('credentials/'.$role.".json")) {
-    $jsonInfo = file_get_contents('credentials/'.$role.'.json');
+  if (file_exists($credDir.$role.".json")) {
+    $jsonInfo = file_get_contents($credDir.$role.'.json');
     $queryArray = json_decode($jsonInfo, true);
   } else {
     $queryArray['role'] = $_GET['role'];
@@ -43,7 +42,7 @@ if (isset($_GET['role']) && isset($_GET['delete'])){
   }
 }
 # Get all Credentials after they've been placed in the file. This is the for sidebar list
-$allCreds = glob('credentials/*.{json}', GLOB_BRACE);
+$allCreds = glob($credDir.'*.{json}', GLOB_BRACE);
 ?>
 <?php 
 if ($msgBox != "") {

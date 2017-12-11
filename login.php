@@ -1,5 +1,5 @@
 <?php
-
+include 'config.php';
 include 'functions.php';
 #var_dump($_POST);
 if (isset($_SESSION['login_user'])) {
@@ -9,7 +9,7 @@ if (isset($_SESSION['login_user'])) {
 if (isset($_POST['username']) && isset($_POST['password'])) {
   $username = $_POST['username'];
   $password = $_POST['password'];
-  $checkUser = checkUser($password, $username);
+  $checkUser = checkUser($password, $username, $usersDir);
   if ($checkUser == 0) {
     session_start();
     $_SESSION['login_user'] = $username;

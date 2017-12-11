@@ -1,6 +1,5 @@
 <?php
 include 'header.php';
-include 'functions.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -13,7 +12,7 @@ if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) 
   if ( $_POST['password'] === $_POST['cpassword'] ) {
     unset($_POST['cpassword']);
     # Checking saved password vs user submitted old password
-    $checkUser = checkUser($_POST['opassword'], $_POST['username']);
+    $checkUser = checkUser($_POST['opassword'], $_POST['username'], $usersDir);
     if ($checkUser == 0) {
       $username = $_POST['username'];
       if ($_POST['pki'] != '') {
@@ -23,7 +22,7 @@ if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) 
       $_POST['password'] = generateHash(16, $_POST['password']);
       unset($_POST['opassword']);
       $jsonConfs = stripslashes(json_encode($_POST));
-      if(file_put_contents('usercreds/'.$username.".json", $jsonConfs)) {
+      if(file_put_contents($usersDir.$username.".json", $jsonConfs)) {
         $msgBox = msgBox("Credentials for ".$_POST['username']." saved.", "success");
       } else {
         $msgBox = msgBox("Credentials for ".$_POST['username']." not saved. Are you trying to be naughty?", "danger");
@@ -52,7 +51,7 @@ if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) 
     $username = $_POST['username'];
     $_POST['password'] = generateHash(16, $_POST['password']);
     $jsonConfs = stripslashes(json_encode($_POST));
-    if(file_put_contents('usercreds/'.$username.".json", $jsonConfs)) {
+    if(file_put_contents($usersDir.$username.".json", $jsonConfs)) {
       $msgBox = msgBox("Credentials for ".$_POST['username']." saved.", "success");
     } else {
       $msgBox = msgBox("Credentials for ".$_POST['username']." not saved. Are you trying to be naughty?", "danger");
@@ -64,15 +63,15 @@ if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) 
 }
 if (isset($_GET['username'])){
   $username = $_GET['username'];
-  if (file_exists('usercreds/'.$username.".json")) {
+  if (file_exists($usersDir.$username.".json")) {
     if ( isset($_GET['delete'])) {
-      if (unlink('usercreds/'.$username.".json")) {
+      if (unlink($usersDir.$username.".json")) {
         $msgBox = msgBox("This credential was deleted.", "success");
       } else {
         $msgBox = msgBox("This credential wasn't deleted. Please try again.", "danger");
       }
     } else {
-      $jsonInfo = file_get_contents('usercreds/'.$username.'.json');
+      $jsonInfo = file_get_contents($usersDir.$username.'.json');
       $queryArray = json_decode($jsonInfo, true);
     }
   } else {
@@ -81,7 +80,7 @@ if (isset($_GET['username'])){
   }
 }
 # Get all Credentials after they've been placed in the file. This is the for sidebar list
-$allCreds = glob('usercreds/*.{json}', GLOB_BRACE);
+$allCreds = glob($usersDir.'*.{json}', GLOB_BRACE);
 ?>
 <?php 
 if ($msgBox != "") {
