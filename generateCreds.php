@@ -15,19 +15,9 @@ if (count($_POST) > 0 && isset($_POST['root']) && isset($_POST['recovery']) && i
   $_POST['recovery'] = generateHash(16, $_POST['recovery']);
   $jsonConfs = stripslashes(json_encode($_POST));
   if(file_put_contents('credentials/'.$role.".json", $jsonConfs)) {
-    $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                 Credentials for ".$_POST['role']." saved.
-                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                   <span aria-hidden='true'>&times;</span>
-                 </button>
-               </div>";
+    $msgBox = msgBox("Credentials for ".$_POST['role']." saved.", "success");
   } else {
-    $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                 Credentials for ".$_POST['role']." not saved. Are you trying to be naughty?
-                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                   <span aria-hidden='true'>&times;</span>
-                 </button>
-               </div>";
+    $msgBox = msgBox("Credentials for ".$_POST['role']." not saved. Are you trying to be naughty?", "danger");
   }
   $_POST = array();
 }
@@ -35,41 +25,21 @@ if (isset($_GET['role']) && isset($_GET['delete'])){
   $role = $_GET['role'];
   if (file_exists('credentials/'.$role.".json")) {
     if (unlink('credentials/'.$role.".json")) {
-      $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                   This credential was deleted.
-                   <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                     <span aria-hidden='true'>&times;</span>
-                   </button>
-                 </div>";
+      $msgBox = msgBox("This credential was deleted.", "success");
     } else {
-      $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                   This credential wasn't deleted. Please try again.
-                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                       <span aria-hidden='true'>&times;</span>
-                     </button>
-                 </div>";
+      $msgBox = msgBox("This credential wasn't deleted. Please try again.", "danger");
     }
   } else {
-    $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                 This credential isn't set. You can add it below.
-                   <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                     <span aria-hidden='true'>&times;</span>
-                   </button>
-               </div>";
+    $msgBox = msgBox("This credential isn't set. You can add it below.", "danger");
   }
 } else if (isset($_GET['role'])){
   $role = $_GET['role'];
   if (file_exists('credentials/'.$role.".json")) {
-      $jsonInfo = file_get_contents('credentials/'.$role.'.json');
-      $queryArray = json_decode($jsonInfo, true);
+    $jsonInfo = file_get_contents('credentials/'.$role.'.json');
+    $queryArray = json_decode($jsonInfo, true);
   } else {
     $queryArray['role'] = $_GET['role'];
-    $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                 This system doesn't have configuration information. You can add it below.
-                   <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                     <span aria-hidden='true'>&times;</span>
-                   </button>
-               </div>";
+    $msgBox = msgBox("This system doesn't have configuration information. You can add it below.", "danger");
   }
 }
 # Get all Credentials after they've been placed in the file. This is the for sidebar list

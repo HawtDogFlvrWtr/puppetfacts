@@ -11,12 +11,7 @@ if (isset($_GET['username'])){
   if (file_exists('usercreds/'.$_GET['username'].".json")) {
     if ( isset($_GET['delete'])) {
       if (unlink('usercreds/'.$_GET['username'].".json")) {
-        $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                     ".$_GET['username']." was deleted.
-                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                       <span aria-hidden='true'>&times;</span>
-                     </button>
-                   </div>";
+        $msgBox = msgBox($_GET['username']." deleted", "success");
         # Check and log out if the current user was deleted
         if (isset($_SESSION['login_user']) && $_SESSION['login_user'] === $_GET['username']) {
           unset($_SESSION['login_user']);
@@ -24,12 +19,7 @@ if (isset($_GET['username'])){
           die();
         }
       } else {
-        $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                     ".$_GET['username']." wasn't deleted. Please try again.
-                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                       <span aria-hidden='true'>&times;</span>
-                     </button>
-                   </div>";
+        $msgBox = msgBox($_GET['username']." wasn't deleted. Please try again.", "danger");
       }
     }
   }

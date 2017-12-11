@@ -26,6 +26,16 @@ function generateHash($saltLength = 16, $passString, $customSalt = '') {
   return crypt($passString, '$6$'.$string); 
 }
 
+function msgBox($message, $type) {
+  $msgBox = "<div class='alert alert-".$type." alert-dismissible fade show' role='alert'>
+               $message
+               <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                 <span aria-hidden='true'>&times;</span>
+               </button>
+             </div>";
+  return $msgBox;
+}
+
 function checkUser($currentPassString, $userName) {
   if (file_exists('usercreds/'.$userName.'.json')) {
     $userCreds = file_get_contents('usercreds/'.$userName.'.json');

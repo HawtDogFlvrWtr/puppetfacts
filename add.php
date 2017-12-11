@@ -36,18 +36,18 @@ if (count($_POST) > 0 && $_POST['macAddress']) {
   $jsonConfs = json_encode($_POST);
   $macAddress = $_POST["macAddress"];
     if(file_put_contents('systems/'.cleanMac($macAddress).".json", $jsonConfs)) {
-      $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>System information saved. <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+      $msgBox = msgBox("System information saved.", "success");
     } else {
-      $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>System information not saved. Are you trying to be naughty?<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+      $msgBox = msgBox("System information NOT saved. Are you trying to be naughty?", "danger");
     }
 }
 if (isset($_GET['macAddress'])){
   if (file_exists('systems/'.cleanMac($_GET['macAddress']).".json")) {
     if ( isset($_GET['delete'])) {
       if (unlink('systems/'.cleanMac($_GET['macAddress']).".json")) {
-        $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>This system configuration was deleted.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+        $msgBox = msgBox("This system configuration was deleted.", "success");
       } else {
-        $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>This system configuration wasn't deleted. Please try again.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+        $msgBox = msgBox("This system configuration was NOT deleted. Please try again.", "danger");
       }
     } else {
       $jsonInfo = file_get_contents('systems/'.cleanMac($_GET['macAddress']).".json");
@@ -77,7 +77,7 @@ if (isset($_GET['macAddress'])){
     }
   } else {
     $queryArray['macAddress'] = $_GET['macAddress'];
-    $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>This system doesn't have configuration information. You can add it below.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+     $msgBox = msgBox("This system doesn't have configuration information. You can add it below.", "danger");
   }
 }
 ?>

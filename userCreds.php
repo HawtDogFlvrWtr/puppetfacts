@@ -24,88 +24,42 @@ if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) 
       unset($_POST['opassword']);
       $jsonConfs = stripslashes(json_encode($_POST));
       if(file_put_contents('usercreds/'.$username.".json", $jsonConfs)) {
-        $msgBox = "<div class='alert alert-success alert-dismissible fade show' username='alert'>
-                     Credentials for ".$_POST['username']." saved.
-                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                       <span aria-hidden='true'>&times;</span>
-                     </button>
-                   </div>";
+        $msgBox = msgBox("Credentials for ".$_POST['username']." saved.", "success");
       } else {
-        $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
-                     Credentials for ".$_POST['username']." not saved. Are you trying to be naughty?
-                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                       <span aria-hidden='true'>&times;</span>
-                     </button>
-                   </div>";
+        $msgBox = msgBox("Credentials for ".$_POST['username']." not saved. Are you trying to be naughty?", "danger");
       }
       $_POST = array();
     # Wrong old password
     } else if ($checkUser == 1) {
-        $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
-                     Your old password for ".$_POST['username']." was not correct. Your new password hasn't been saved.
-                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                       <span aria-hidden='true'>&times;</span>
-                     </button>
-                   </div>";
+        $msgBox = msgBox("Your old password for ".$_POST['username']." was not correct. Your new password hasn't been saved.", "danger");
     # User doesn't exist
     } else if ($checkUser == 2) {
-        $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
-                     The user ".$_POST['username']." doesn't exist. Are you trying to be naughty?
-                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                       <span aria-hidden='true'>&times;</span>
-                     </button>
-                   </div>";
-      
+        $msgBox = msgBox("The user ".$_POST['username']." doesn't exist. Are you trying to be naughty?", "danger");
     }
   } else {
-        $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
-                     Your new passwords didn't match. Please try again. 
-                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                       <span aria-hidden='true'>&times;</span>
-                     </button>
-                   </div>";
+        $msgBox = msgBox("Your new passwords didn't match. Please try again.", "danger");
   }
 } else if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['pki'])) {
   if ($_POST['pki'] != '') {
     $pkiDirty = explode(' ', $_POST['pki']);
     $_POST['pki'] = $pkiDirty[0]." ".$pkiDirty[1];
   }
-  if (strpos($_POST['pki'], 'ssh-rsa') === false ) {
+  if ($_POST['pki'] != '' && strpos($_POST['pki'], 'ssh-rsa') === false ) {
     # Dump if pki is invalid
-    $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
-                 Credentials for ".$_POST['username']." NOT saved. It appears your Certificate is invalid. It should begin with 'ssh-rsa'.
-                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                   <span aria-hidden='true'>&times;</span>
-                 </button>
-               </div>";
+    $msgBox = msgBox("Credentials for ".$_POST['username']." NOT saved. It appears your Certificate is invalid. It should begin with 'ssh-rsa'.", "danger");
   } else if ( $_POST['password'] === $_POST['cpassword'] ) {
     unset($_POST['cpassword']);
     $username = $_POST['username'];
     $_POST['password'] = generateHash(16, $_POST['password']);
     $jsonConfs = stripslashes(json_encode($_POST));
     if(file_put_contents('usercreds/'.$username.".json", $jsonConfs)) {
-      $msgBox = "<div class='alert alert-success alert-dismissible fade show' username='alert'>
-                   Credentials for ".$_POST['username']." saved.
-                   <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                     <span aria-hidden='true'>&times;</span>
-                   </button>
-                 </div>";
+      $msgBox = msgBox("Credentials for ".$_POST['username']." saved.", "success");
     } else {
-      $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
-                   Credentials for ".$_POST['username']." not saved. Are you trying to be naughty?
-                   <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                     <span aria-hidden='true'>&times;</span>
-                   </button>
-                 </div>";
+      $msgBox = msgBox("Credentials for ".$_POST['username']." not saved. Are you trying to be naughty?", "danger");
     }
     $_POST = array();
   } else {
-        $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
-                     Your new passwords didn't match. Please try again. 
-                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                       <span aria-hidden='true'>&times;</span>
-                     </button>
-                   </div>";
+    $msgBox = msgBox("Your new passwords didn't match. Please try again.", "danger");
   }
 }
 if (isset($_GET['username'])){
@@ -113,19 +67,9 @@ if (isset($_GET['username'])){
   if (file_exists('usercreds/'.$username.".json")) {
     if ( isset($_GET['delete'])) {
       if (unlink('usercreds/'.$username.".json")) {
-        $msgBox = "<div class='alert alert-success alert-dismissible fade show' username='alert'>
-                     This credential was deleted.
-                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                       <span aria-hidden='true'>&times;</span>
-                     </button>
-                   </div>";
+        $msgBox = msgBox("This credential was deleted.", "success");
       } else {
-        $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
-                     This credential wasn't deleted. Please try again.
-                       <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                         <span aria-hidden='true'>&times;</span>
-                       </button>
-                   </div>";
+        $msgBox = msgBox("This credential wasn't deleted. Please try again.", "danger");
       }
     } else {
       $jsonInfo = file_get_contents('usercreds/'.$username.'.json');
@@ -133,12 +77,7 @@ if (isset($_GET['username'])){
     }
   } else {
     $queryArray['username'] = $_GET['username'];
-    $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
-                 This user doesn't have configuration information. You can add it below.
-                   <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                     <span aria-hidden='true'>&times;</span>
-                   </button>
-               </div>";
+    $msgBox = msgBox("This user doesn't have configuration information. You can add it below.", "danger");
   }
 }
 # Get all Credentials after they've been placed in the file. This is the for sidebar list

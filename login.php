@@ -16,12 +16,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     header("Location: index.php");
     die();
   } else if ($checkUser == 1) {
-    $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
-                 Username or password incorrect.
-                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                   <span aria-hidden='true'>&times;</span>
-                 </button>
-               </div>";
+    $msgBox = msgBox("Username or password incorrect.", "danger");
   }
 }
 ?>

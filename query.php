@@ -17,31 +17,16 @@ if (count($_POST) > 0 && $_POST['macAddress']) {
   $jsonConfs = json_encode($_POST);
   $macAddress = $_POST["macAddress"];
   file_put_contents(cleanMac($macAddress).".json", $jsonConfs);
-  $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-               System information saved.
-               <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                 <span aria-hidden='true'>&times;</span>
-               </button>
-             </div>";
+  $msgBox = msgBox("System information saved.", "success");
 }
 if (isset($_GET['macAddress'])){
   if (file_exists(cleanMac($_GET['macAddress']).".json")) {
     $jsonInfo = file_get_contents(cleanMac($_GET['macAddress']).".json");
     $queryArray = json_decode($jsonInfo, true);
-    $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                 System information loaded.
-                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                   <span aria-hidden='true'>&times;</span>
-                 </button>
-               </div>";
+    $msgBox = msgBox("System informatoin loaded.", "success");
   } else {
     $queryArray['macAddress'] = $_GET['macAddress'];
-    $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                 This system doesn't have configuration information.
-                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                   <span aria-hidden='true'>&times;</span>
-                 </button>
-               </div>";
+    $msgBox = msgBox("This system doesn't have configuration information.", "danger");
   }
 }
 if ($msgBox != "") {
