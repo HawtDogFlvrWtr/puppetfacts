@@ -58,8 +58,10 @@ if (isset($_GET["macAddress"])) {
   $userArray = array();
   $files = glob($usersDir.'*.{json}', GLOB_BRACE);
   foreach($files as $file) {
-    $jsonDecode = json_decode(file_get_contents($file), true);
-    $userArray[] = $jsonDecode;
+    if ($file !== $usersDir.'admin.json') {
+      $jsonDecode = json_decode(file_get_contents($file), true);
+      $userArray[] = $jsonDecode;
+    }
   }
   header('Content-Type: application/json');
   echo prettyPrint(stripslashes(json_encode($userArray)));
