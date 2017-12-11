@@ -28,3 +28,8 @@ input, select {
 .current-set-margin {
   margin-top:10px;
 }
+.delete-cred {
+  float:right;
+  margin-top:5px;
+  color:red;
+}

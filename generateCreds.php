@@ -31,29 +31,37 @@ if (count($_POST) > 0 && isset($_POST['root']) && isset($_POST['recovery']) && i
   }
   $_POST = array();
 }
-if (isset($_GET['role'])){
+if (isset($_GET['role']) && isset($_GET['delete'])){
   $role = $_GET['role'];
   if (file_exists('credentials/'.$role.".json")) {
-    if ( isset($_GET['delete'])) {
-      if (unlink('credentials/'.$role.".json")) {
-        $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                     This credential was deleted.
+    if (unlink('credentials/'.$role.".json")) {
+      $msgBox = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                   This credential was deleted.
+                   <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                     <span aria-hidden='true'>&times;</span>
+                   </button>
+                 </div>";
+    } else {
+      $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                   This credential wasn't deleted. Please try again.
                      <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                        <span aria-hidden='true'>&times;</span>
                      </button>
-                   </div>";
-      } else {
-        $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                     This credential wasn't deleted. Please try again.
-                       <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                         <span aria-hidden='true'>&times;</span>
-                       </button>
-                   </div>";
-      }
-    } else {
+                 </div>";
+    }
+  } else {
+    $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                 This credential isn't set. You can add it below.
+                   <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                     <span aria-hidden='true'>&times;</span>
+                   </button>
+               </div>";
+  }
+} else if (isset($_GET['role'])){
+  $role = $_GET['role'];
+  if (file_exists('credentials/'.$role.".json")) {
       $jsonInfo = file_get_contents('credentials/'.$role.'.json');
       $queryArray = json_decode($jsonInfo, true);
-    }
   } else {
     $queryArray['role'] = $_GET['role'];
     $msgBox = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
@@ -114,7 +122,23 @@ if ($msgBox != "") {
       <ul>
     <?php
       foreach($allCreds as $cred) {
-        echo '<li>'.basename($cred, '.json').'</li>';
+        echo '<li>'.basename($cred, '.json').'<a data-toggle="modal" href="#delete'.basename($cred, '.json').'"><i class="delete-cred fa fa-trash-alt"></i></a></li>';
+        echo '<div id="delete'.basename($cred, '.json').'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form action="generateCreds.php" method="get">
+                      <div class="modal-body">
+                        <p class="lead">Are you sure you want to remove this credential?</p> 
+                      </div>
+                      <div class="modal-footer">
+                        <button type="input" name="role" value="'.basename($cred, '.json').'" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Yes, Remove It</button>
+                        <input type="hidden" name="delete" value="true">
+                        <button type="button" class="btn btn-default btn-icon" data-dismiss="modal"><i class="fa fa-times-circle-o"></i> Cancel</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>';
       }
     ?>
       </ul>

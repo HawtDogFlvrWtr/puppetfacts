@@ -84,7 +84,7 @@ if (count($files) > 0) {
                    </div>
                    <div class="modal-footer">
                      <button type="input" name="macAddress" value="'.$jsonDecode['macAddress'].'" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Yes, Remove It</button>
-                     <input type="hidden" name="delete">
+                     <input type="hidden" name="delete" value="true">
                      <button type="button" class="btn btn-default btn-icon" data-dismiss="modal"><i class="fa fa-times-circle-o"></i> Cancel</button>
                    </div>
                  </form>
