@@ -27,17 +27,14 @@ if (!file_exists("credentials/default.json")) {
     <title>Host configuration</title>
     <link rel="stylesheet" type="text/css" href='css/bootstrap.min.css'>
     <link rel="stylesheet" type="text/css" href='css/fontawesome-all.min.css'>
+    <link rel="stylesheet" type="text/css" href='css/custom.css'>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <style>
-      label{display:inline-block;}
-      input, select{display:block;}
-    </style>
     <script src='js/jquery-3.2.1.slim.min.js'></script>
     <script src='js/popper.min.js'></script>
     <script src='js/bootstrap.min.js'></script>
   </head>
 <body>
-<div class="container" style="padding-bottom:20px;">
+<div class="container container-header">
 <nav class="border rounded navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="index.php">Puppet-Facts</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,32 +43,32 @@ if (!file_exists("credentials/default.json")) {
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item <?php if ($currentPage == 'add') { echo 'active'; } ?>">
-        <a style="margin-left:5px;" class="btn btn-success  btn-sm" href="add.php"><i class="fa fa-plus"></i> Add System <?php if ($currentPage == 'add') { echo '<span class="sr-only">(current)</span>'; } ?></a>
+        <a class="nav-margin btn btn-success  btn-sm" href="add.php"><i class="fa fa-plus"></i> Add System <?php if ($currentPage == 'add') { echo '<span class="sr-only">(current)</span>'; } ?></a>
       </li>
       <li class="nav-item <?php if ($currentPage == 'allSystems') { echo 'active'; } ?>">
-        <a style="margin-left:5px;" class="btn btn-success  btn-sm" href="allSystems.php"><i class="fa fa-desktop"></i> All Systems <?php if ($currentPage == 'allSystems') { echo '<span class="sr-only">(current)</span>'; }?></a>
+        <a class="nav-margin btn btn-success  btn-sm" href="allSystems.php"><i class="fa fa-desktop"></i> All Systems <?php if ($currentPage == 'allSystems') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
       <li class="nav-item <?php if ($currentPage == 'userCreds') { echo 'active'; } ?>">
-        <a style="margin-left:5px;" class="btn btn-success  btn-sm" href="userCreds.php"><i class="fa fa-user-plus"></i> Add User <?php if ($currentPage == 'userCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
+        <a class="nav-margin btn btn-success  btn-sm" href="userCreds.php"><i class="fa fa-user-plus"></i> Add User <?php if ($currentPage == 'userCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
       <li class="nav-item <?php if ($currentPage == 'allUsers') { echo 'active'; } ?>">
-        <a style="margin-left:5px;" class="btn btn-success  btn-sm" href="allUsers.php"><i class="fa fa-users"></i> All Users <?php if ($currentPage == 'allUsers') { echo '<span class="sr-only">(current)</span>'; }?></a>
+        <a class="nav-margin btn btn-success  btn-sm" href="allUsers.php"><i class="fa fa-users"></i> All Users <?php if ($currentPage == 'allUsers') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
       <li class="nav-item <?php if ($currentPage == 'generateCreds') { echo 'active'; } ?>">
-        <a style="margin-left:5px;" class="btn btn-success  btn-sm" href="generateCreds.php"><i class="fa fa-unlock-alt"></i> Role Credentials <?php if ($currentPage == 'generateCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
+        <a class="nav-margin btn btn-success  btn-sm" href="generateCreds.php"><i class="fa fa-unlock-alt"></i> Role Credentials <?php if ($currentPage == 'generateCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item active" >
-        <a style="margin-left:5px;" class="btn btn-danger  btn-sm" href="index.php?logout"><i class="fa fa-sign-out-alt"></i> Log Out</a>
+        <a class="nav-margin btn btn-danger  btn-sm" href="index.php?logout"><i class="fa fa-sign-out-alt"></i> Log Out</a>
       </li>
     </ul>
   </div>
 </nav>
-  <div style="margin-top:15px;" class="col-md-12">
+  <div class="search-margin col-md-12">
     <form class="form-inline my-2 my-lg-0" method="get" action="add.php">
       <input class="form-control col-md-11" id="macAddress" name="macAddress" type="search" placeholder="Search for a MAC Address" aria-label="Search">
-        <button style="margin-left:2px;" class="btn btn-outlline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="search-button-margin btn btn-outlline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
 </div>

@@ -193,7 +193,7 @@ if ($msgBox != "") {
   <div class="col-md-0"> 
   </div>
   <div class="border rounded-right border-left-0 col-md-2">
-    <h5 style="margin-top:10px;" >Currently Set</h5>
+    <h5 class="current-set-margin" >Currently Set</h5>
     <?php
       if (count($allCreds) != 0) {
     ?>

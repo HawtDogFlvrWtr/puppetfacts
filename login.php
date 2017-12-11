@@ -31,10 +31,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     <link rel="stylesheet" type="text/css" href='css/bootstrap.min.css'>
     <link rel="stylesheet" type="text/css" href='css/login.css'>
     <link rel="stylesheet" type="text/css" href='css/fontawesome-all.min.css'> 
-    <style>
-      label{display:inline-block;}
-      input, select{display:block;}
-    </style>
     <script src='js/jquery-3.2.1.slim.min.js'></script>
     <script src='js/popper.min.js'></script>
     <script src='js/bootstrap.min.js'></script>
@@ -43,14 +39,14 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 <body>
 <?php
 if ($msgBox != "") {
-  echo '<div style="margin-top:10px;" class="col-centered col-md-6 text-center">';
+  echo '<div class="msgBox col-centered col-md-6 text-center">';
   echo $msgBox;
   echo '</div>';
 }
 ?>
-  <div style="margin-top:200px;" class="row col-md-12">
+  <div class="loginRow row col-md-12">
      <div class="border col-centered rounded bg-light col-md-2 text-center">
-        <h2 style="margin-top:5px;">Puppet-Facts</h2>
+        <h2 class="headerText">Puppet-Facts</h2>
         <form method="post" action="login.php" >
               <div class="form-row">
                 <div class="form-group col-md-12">

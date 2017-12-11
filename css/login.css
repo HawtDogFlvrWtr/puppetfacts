@@ -42,3 +42,18 @@ h4 {
   display: flex;
   align-items: center;
 }
+label {
+  display:inline-block;
+}
+input, select {
+  display:block;
+}
+.headerText {
+  margin-top:5px;
+}
+.msgBox {
+  margin-top:10px;
+}
+.loginRow {
+  margin-top:200px;
+}

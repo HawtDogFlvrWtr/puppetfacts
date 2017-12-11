@@ -31,12 +31,12 @@ if (isset($_GET['macAddress'])){
 # Get list of systems, This after the delete statement above, so it updates the page on post.
 $files = glob('systems/*.{json}', GLOB_BRACE);
 if ($msgBox != "") {
-  echo '<div class="container">';
+  echo '<div class="red-text container">';
   echo $msgBox;
   echo '</div>';
 }
 ?>
-<div style="min-height:150px;" class="container border rounded bg-light">
+<div class="container-margin container border rounded bg-light">
 <h1>All Systems</h1>
 <p>These are the current systems that you have configuration information for. You can edit or delete any record.</p>
 <?php 
@@ -65,7 +65,7 @@ if (count($files) > 0) {
      } else if (file_exists("credentials/default.json")) {
        echo '<td>default</td>';
      } else {
-       echo '<td style="color:red;">NOT SET</td>';
+       echo '<td class="redText">NOT SET</td>';
      }
      echo '<td>'.$jsonDecode['macAddress'].'</td>';
      echo '<td>'.$jsonDecode['ipAddresses'].'</td>';

@@ -1,0 +1,30 @@
+.container-margin {
+  min-height:150px;
+}
+.red-text {
+  color:red;
+}
+.green-text {
+  color:green;
+}
+label {
+  display:inline-block;
+}
+input, select {
+  display:block;
+}
+.container-header {
+  padding-bottom:20px;
+}
+.nav-margin {
+  margin-left:5px;
+}
+.search-margin {
+  margin-top:15px;
+}
+.search-button-margin {
+  margin-left:2px;
+}
+.current-set-margin {
+  margin-top:10px;
+}

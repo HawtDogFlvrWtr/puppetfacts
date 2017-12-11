@@ -31,12 +31,12 @@ if (isset($_GET['username'])){
 # Get list of systems, This after the delete statement above, so it updates the page on post.
 $files = glob('usercreds/*.{json}', GLOB_BRACE);
 if ($msgBox != "") {
-  echo '<div class="container">';
+  echo '<div class="red-text container">';
   echo $msgBox;
   echo '</div>';
 }
 ?>
-<div style="min-height:150px;" class="container border rounded bg-light">
+<div class="container-margin container border rounded bg-light">
 <h1>All Users</h1>
 <p>These are the current users that you have configuration information for. You can edit or delete any record.</p>
 <?php 
@@ -56,14 +56,14 @@ if (count($files) > 0) {
    foreach($files as $file) {
      $jsonDecode = json_decode(file_get_contents($file), true);
      if (isset($jsonDecode['pki'])) {
-       $pkiOut = "<b style='color:green;'>SET</b>";
+       $pkiOut = "<b class='green-text'>SET</b>";
      } else {
-       $pkiOut = "<b style='color:red;'>UNSET</b>";
+       $pkiOut = "<b class='red-text'>UNSET</b>";
      }
      if (isset($jsonDecode['password'])) {
-       $passOut = "<b style='color:green;'>SET</b>";
+       $passOut = "<b class='green-text'>SET</b>";
      } else {
-       $passOut = "<b style='color:red;'>UNSET</b>";
+       $passOut = "<b class='red-text'>UNSET</b>";
      }
      echo '<tr>';
      echo '<td>'.$jsonDecode['username'].'</td>';
