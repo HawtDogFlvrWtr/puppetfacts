@@ -39,7 +39,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 <body>
 <?php
 if ($msgBox != "") {
-  echo '<div class="msgBox col-centered col-md-6 text-center">';
+  echo '<div class="msg-box col-centered col-md-6 text-center">';
   echo $msgBox;
   echo '</div>';
 }
