@@ -66,13 +66,21 @@ if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) 
                    </div>";
   }
 } else if (count($_POST) > 0 && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['pki'])) {
-  if ( $_POST['password'] === $_POST['cpassword'] ) {
+  if ($_POST['pki'] != '') {
+    $pkiDirty = explode(' ', $_POST['pki']);
+    $_POST['pki'] = $pkiDirty[0]." ".$pkiDirty[1];
+  }
+  if (strpos($_POST['pki'], 'ssh-rsa') === false ) {
+    # Dump if pki is invalid
+    $msgBox = "<div class='alert alert-danger alert-dismissible fade show' username='alert'>
+                 Credentials for ".$_POST['username']." NOT saved. It appears your Certificate is invalid. It should begin with 'ssh-rsa'.
+                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                   <span aria-hidden='true'>&times;</span>
+                 </button>
+               </div>";
+  } else if ( $_POST['password'] === $_POST['cpassword'] ) {
     unset($_POST['cpassword']);
     $username = $_POST['username'];
-    if ($_POST['pki'] != '') {
-      $pkiDirty = explode(' ', $_POST['pki']);
-      $_POST['pki'] = $pkiDirty[0]." ".$pkiDirty[1];
-    }
     $_POST['password'] = generateHash(16, $_POST['password']);
     $jsonConfs = stripslashes(json_encode($_POST));
     if(file_put_contents('usercreds/'.$username.".json", $jsonConfs)) {
