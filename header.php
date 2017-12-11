@@ -14,7 +14,7 @@ if (!isset($_SESSION['login_user']) OR isset($_GET['logout'])) {
 $currentPage = basename($_SERVER['PHP_SELF'],'.php');
 if (!file_exists($credDir."default.json")) {
   if ($currentPage == 'generateCreds') {
-    $msgBox = msgBox("You have no default credentials configured. This will prevent puppet from running correctly. If you have already set a default credential, please refresh this page for them to take effect.", "danger");
+    $msgBox = msgBox("You have no default credentials configured. This will prevent puppet from running correctly. If you have already set a default credential, please refresh this page for them to take effect.", "warning");
   } else {
     $msgBox = msgBox("You have no default credentials configured. This will prevent puppet from running correctly. Please set one by clicking <a href='generateCreds.php'>Role Credentials</a> above.", "warning");
   }

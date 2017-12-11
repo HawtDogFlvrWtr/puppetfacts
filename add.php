@@ -157,7 +157,7 @@ if (isset($_GET['macAddress'])){
         </select></label>
     </div>
   </div>
-  <input type="submit" name="" value="Submit">
+  <input class="btn btn-success" type="submit" name="" value="Submit">
 </form> 
 </div>
 <?php include 'footer.php';?>

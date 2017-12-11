@@ -133,7 +133,7 @@ if ($msgBox != "") {
         <label>Certificate String<textarea rows="8" cols="100" id="pki" name="pki" placeholder="PKI String"><?php if (isset($queryArray['pki'])) { echo $queryArray['pki']; }?></textarea></label>
       </div>
     </div>
-    <input type="submit" name="" value="Submit">
+    <input class="btn btn-success" type="submit" name="" value="Submit">
     </form>
   </div>
   <div class="col-md-0"> 
