@@ -65,7 +65,7 @@ if (count($files) > 0) {
      } else if (file_exists("credentials/default.json")) {
        echo '<td>default</td>';
      } else {
-       echo '<td class="redText">NOT SET</td>';
+       echo '<td class="red-text">NOT SET</td>';
      }
      echo '<td>'.$jsonDecode['macAddress'].'</td>';
      echo '<td>'.$jsonDecode['ipAddresses'].'</td>';
