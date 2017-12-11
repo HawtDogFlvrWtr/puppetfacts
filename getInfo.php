@@ -37,7 +37,7 @@ if (isset($_GET["macAddress"])) {
       $jsonArrayBase = array_merge($credJsonArray, $jsonArrayBase);
     }
     header('Content-Type: application/json');
-    echo stripslashes(json_encode($jsonArrayBase));
+    echo prettyPrint(stripslashes(json_encode($jsonArrayBase)));
   } else {
     echo "This systems configuration doesn't exist.<br>";
     echo printHelp();
@@ -49,7 +49,7 @@ if (isset($_GET["macAddress"])) {
   if (file_exists($usersDir.$username.".json") && count($addProps) <= 1){
     $fileContent = file_get_contents($usersDir.$username.".json", true);
     header('Content-Type: application/json');
-    echo stripslashes($fileContent);
+    echo prettyPrint(stripslashes($fileContent));
   } else {
     echo "This user doesn't exist.<br>";
     echo printHelp();
