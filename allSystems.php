@@ -10,9 +10,9 @@ if (isset($_GET['macAddress'])){
   if (file_exists($systemsDir.cleanMac($_GET['macAddress']).".json")) {
     if ( isset($_GET['delete'])) {
       if (unlink($systemsDir.cleanMac($_GET['macAddress']).".json")) {
-        $msgBox = msgBox("This system configuration was deleted.", "success");
+        $msgBox = msgBox("This systems (".$_GET['macAddress'].") configuration was deleted.", "success");
       } else {
-        $msgBox = msgBox("This system configuration wasn't deleted. Please try again.", "danger");
+        $msgBox = msgBox("This systems (".$_GET['macAddress'].") configuration wasn't deleted. Please try again.", "danger");
       }
     }
   }

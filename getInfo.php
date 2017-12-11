@@ -1,5 +1,7 @@
 <?php
 include 'functions.php';
+include 'config.php';
+
 #ini_set('display_errors', 1); 
 #ini_set('display_startup_errors', 1); 
 #error_reporting(E_ALL);
@@ -40,7 +42,7 @@ if (isset($_GET["macAddress"])) {
     echo "This systems configuration doesn't exist.<br>";
     echo printHelp();
   }
-} else if (isset($_GET["username"])) {
+} else if (isset($_GET["username"]) && $_GET['username'] != 'admin') {
   # Get username 
   $username = $_GET["username"];
   # Open new file if it doesn't exists, removing the colon's from the file name

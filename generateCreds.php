@@ -14,9 +14,9 @@ if (count($_POST) > 0 && isset($_POST['root']) && isset($_POST['recovery']) && i
   $_POST['recovery'] = generateHash(16, $_POST['recovery']);
   $jsonConfs = stripslashes(json_encode($_POST));
   if(file_put_contents($credDir.$role.".json", $jsonConfs)) {
-    $msgBox = msgBox("Credentials for ".$_POST['role']." saved.", "success");
+    $msgBox = msgBox("Credentials for ".$_POST['role']." were saved successfully.", "success");
   } else {
-    $msgBox = msgBox("Credentials for ".$_POST['role']." not saved. Are you trying to be naughty?", "danger");
+    $msgBox = msgBox("Credentials for ".$_POST['role']." were not saved. Please check folder permissions and try again.", "danger");
   }
   $_POST = array();
 }
@@ -24,12 +24,12 @@ if (isset($_GET['role']) && isset($_GET['delete'])){
   $role = $_GET['role'];
   if (file_exists($credDir.$role.".json")) {
     if (unlink($credDir.$role.".json")) {
-      $msgBox = msgBox("This credential was deleted.", "success");
+      $msgBox = msgBox("The credentials for ".$_GET['role']." were deleted successfully.", "success");
     } else {
-      $msgBox = msgBox("This credential wasn't deleted. Please try again.", "danger");
+      $msgBox = msgBox("The credentials for ".$_GET['role']." weren't deleted. Please check folder permissions and try again.", "danger");
     }
   } else {
-    $msgBox = msgBox("This credential isn't set. You can add it below.", "danger");
+    $msgBox = msgBox("The credentials for ".$_GET['role']." don't exist. You can add it below.", "danger");
   }
 } else if (isset($_GET['role'])){
   $role = $_GET['role'];
@@ -38,7 +38,7 @@ if (isset($_GET['role']) && isset($_GET['delete'])){
     $queryArray = json_decode($jsonInfo, true);
   } else {
     $queryArray['role'] = $_GET['role'];
-    $msgBox = msgBox("This system doesn't have configuration information. You can add it below.", "danger");
+    $msgBox = msgBox("The credentials for ".$_GET['role']." don't exist. You can add it below.", "danger");
   }
 }
 # Get all Credentials after they've been placed in the file. This is the for sidebar list

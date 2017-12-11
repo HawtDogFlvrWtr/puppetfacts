@@ -10,7 +10,7 @@ if (isset($_GET['username'])){
   if (file_exists($usersDir.$_GET['username'].".json")) {
     if ( isset($_GET['delete'])) {
       if (unlink($usersDir.$_GET['username'].".json")) {
-        $msgBox = msgBox($_GET['username']." deleted", "success");
+        $msgBox = msgBox("User (".$_GET['username'].") was deleted successfully.", "success");
         # Check and log out if the current user was deleted
         if (isset($_SESSION['login_user']) && $_SESSION['login_user'] === $_GET['username']) {
           unset($_SESSION['login_user']);
@@ -18,7 +18,7 @@ if (isset($_GET['username'])){
           die();
         }
       } else {
-        $msgBox = msgBox($_GET['username']." wasn't deleted. Please try again.", "danger");
+        $msgBox = msgBox($_GET['username']." wasn't deleted. There was an issue deleting the information, or the user no longer exists. Please try again.", "danger");
       }
     }
   }
@@ -67,8 +67,13 @@ if (count($files) > 0) {
      echo '<td>
 	<a class="btn btn-warning btn-icon" href="userCreds.php?username='.$jsonDecode['username'].'"><i class="fa fa-edit"></i> Edit</a>
 	<a data-toggle="modal" href="#delete'.$row.'" class="btn btn-danger btn-icon" data-dismiss="modal"><i class="fa fa-trash-alt"></i> Delete</a>
-	<a target="_blank" href="getInfo.php?username='.$jsonDecode['username'].'" class="btn btn-success btn-icon"><i class="fa fa-code"></i> JSON</a>
-	  </td>';
+     ';
+     # don't show the json information for the admin user
+     if ($jsonDecode['username'] != "admin") {
+	echo '<a target="_blank" href="getInfo.php?username='.$jsonDecode['username'].'" class="btn btn-success btn-icon"><i class="fa fa-code"></i> JSON</a>';
+
+     }
+     echo '</td>';
      echo '</tr>';
      echo '<div id="delete'.$row.'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
              <div class="modal-dialog">

@@ -22,7 +22,7 @@ if (!file_exists($credDir."default.json")) {
 ?>
 <html>
   <head>
-    <title>Host configuration</title>
+    <title>Puppet-Facts</title>
     <link rel="stylesheet" type="text/css" href='css/bootstrap.min.css'>
     <link rel="stylesheet" type="text/css" href='css/fontawesome-all.min.css'>
     <link rel="stylesheet" type="text/css" href='css/custom.css'>
@@ -41,19 +41,19 @@ if (!file_exists($credDir."default.json")) {
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item <?php if ($currentPage == 'add') { echo 'active'; } ?>">
-        <a class="nav-margin btn btn-success  btn-sm" href="add.php"><i class="fa fa-plus"></i> Add System <?php if ($currentPage == 'add') { echo '<span class="sr-only">(current)</span>'; } ?></a>
+        <a class="nav-margin btn btn-light btn-sm" href="add.php"><i class="fa fa-plus"></i> Add System <?php if ($currentPage == 'add') { echo '<span class="sr-only">(current)</span>'; } ?></a>
       </li>
       <li class="nav-item <?php if ($currentPage == 'allSystems') { echo 'active'; } ?>">
-        <a class="nav-margin btn btn-success  btn-sm" href="allSystems.php"><i class="fa fa-desktop"></i> All Systems <?php if ($currentPage == 'allSystems') { echo '<span class="sr-only">(current)</span>'; }?></a>
+        <a class="nav-margin btn btn-light btn-sm" href="allSystems.php"><i class="fa fa-desktop"></i> All Systems <?php if ($currentPage == 'allSystems') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
       <li class="nav-item <?php if ($currentPage == 'userCreds') { echo 'active'; } ?>">
-        <a class="nav-margin btn btn-success  btn-sm" href="userCreds.php"><i class="fa fa-user-plus"></i> Add User <?php if ($currentPage == 'userCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
+        <a class="nav-margin btn btn-light btn-sm" href="userCreds.php"><i class="fa fa-user-plus"></i> Add User <?php if ($currentPage == 'userCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
       <li class="nav-item <?php if ($currentPage == 'allUsers') { echo 'active'; } ?>">
-        <a class="nav-margin btn btn-success  btn-sm" href="allUsers.php"><i class="fa fa-users"></i> All Users <?php if ($currentPage == 'allUsers') { echo '<span class="sr-only">(current)</span>'; }?></a>
+        <a class="nav-margin btn btn-light btn-sm" href="allUsers.php"><i class="fa fa-users"></i> All Users <?php if ($currentPage == 'allUsers') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
       <li class="nav-item <?php if ($currentPage == 'generateCreds') { echo 'active'; } ?>">
-        <a class="nav-margin btn btn-success  btn-sm" href="generateCreds.php"><i class="fa fa-unlock-alt"></i> Role Credentials <?php if ($currentPage == 'generateCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
+        <a class="nav-margin btn btn-light btn-sm" href="generateCreds.php"><i class="fa fa-unlock-alt"></i> Role Credentials <?php if ($currentPage == 'generateCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
     </ul>
     <ul class="navbar-nav">
