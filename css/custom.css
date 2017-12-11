@@ -33,3 +33,7 @@ input, select {
   margin-top:5px;
   color:red;
 }
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}

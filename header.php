@@ -68,7 +68,8 @@ if (!file_exists("credentials/default.json")) {
   <div class="search-margin col-md-12">
     <form class="form-inline my-2 my-lg-0" method="get" action="add.php">
       <input class="form-control col-md-11" id="macAddress" name="macAddress" type="search" placeholder="Search for a MAC Address" aria-label="Search">
-        <button class="search-button-margin btn btn-outlline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outlline-success col-md-1 my-sm-0" type="submit"><i class="fa fa-search"></i> Search</button>
+      </input>
     </form>
   </div>
 </div>
