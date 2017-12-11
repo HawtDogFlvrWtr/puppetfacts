@@ -55,12 +55,12 @@ if (count($files) > 0) {
 <?php
    foreach($files as $file) {
      $jsonDecode = json_decode(file_get_contents($file), true);
-     if (isset($jsonDecode['pki'])) {
+     if (isset($jsonDecode['pki']) && $jsonDecode['pki'] != '') {
        $pkiOut = "<b class='green-text'>SET</b>";
      } else {
        $pkiOut = "<b class='red-text'>UNSET</b>";
      }
-     if (isset($jsonDecode['password'])) {
+     if (isset($jsonDecode['password']) && $jsonDecode['password'] != '') {
        $passOut = "<b class='green-text'>SET</b>";
      } else {
        $passOut = "<b class='red-text'>UNSET</b>";
