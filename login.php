@@ -38,7 +38,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     <script src='js/jquery-3.2.1.slim.min.js'></script>
     <script src='js/popper.min.js'></script>
     <script src='js/bootstrap.min.js'></script>
-    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   </head>
 <body>
@@ -51,7 +50,7 @@ if ($msgBox != "") {
 ?>
   <div style="margin-top:200px;" class="row col-md-12">
      <div class="border col-centered rounded bg-light col-md-2 text-center">
-        <h1 style="margin-top:5px;">Puppet-Facts</h1>
+        <h2 style="margin-top:5px;">Puppet-Facts</h2>
         <form method="post" action="login.php" >
               <div class="form-row">
                 <div class="form-group col-md-12">

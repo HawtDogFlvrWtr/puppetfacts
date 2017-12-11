@@ -27,6 +27,7 @@ if (!file_exists("credentials/default.json")) {
     <title>Host configuration</title>
     <link rel="stylesheet" type="text/css" href='css/bootstrap.min.css'>
     <link rel="stylesheet" type="text/css" href='css/fontawesome-all.min.css'>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <style>
       label{display:inline-block;}
       input, select{display:block;}
