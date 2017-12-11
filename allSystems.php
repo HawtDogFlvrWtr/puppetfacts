@@ -70,9 +70,9 @@ if (count($files) > 0) {
      echo '<td>'.$jsonDecode['macAddress'].'</td>';
      echo '<td>'.$jsonDecode['ipAddresses'].'</td>';
      echo '<td>
-	<a class="btn btn-warning btn-icon" href="add.php?macAddress='.$jsonDecode['macAddress'].'">Edit</a>
-	<a data-toggle="modal" href="#delete'.$row.'" class="btn btn-danger btn-icon" data-dismiss="modal"><i class="fa fa-ban"></i>Delete</a>
-	<a target="_blank" href="getInfo.php?macAddress='.$jsonDecode['macAddress'].'" class="btn btn-success btn-icon">JSON</a>
+	<a class="btn btn-warning btn-icon" href="add.php?macAddress='.$jsonDecode['macAddress'].'"><i class="fa fa-edit"></i> Edit</a>
+	<a data-toggle="modal" href="#delete'.$row.'" class="btn btn-danger btn-icon" data-dismiss="modal"><i class="fa fa-trash-alt"></i> Delete</a>
+	<a target="_blank" href="getInfo.php?macAddress='.$jsonDecode['macAddress'].'" class="btn btn-success btn-icon"><i class="fa fa-code"></i> JSON</a>
 	  </td>';
      echo '</tr>';
      echo '<div id="delete'.$row.'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
