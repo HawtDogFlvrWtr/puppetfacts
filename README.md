@@ -4,6 +4,7 @@ puppetfacts is a php framework, wrapped with a bootstrap interface. The framewor
 ## Table of contents
 * [Setup](#setup)
   * [Software](#software)
+  * [Configuration](#configuration)
 * [Usage](#usage)
   * [Api](#api)
   * [HTML Interface](#html-interface)
@@ -27,7 +28,8 @@ Required:
 * Php 5.4.16 +
 
 To install, simply clone this repository into the folder of your choice, and run install.sh with bash. This should create the credentials and systems folders for you, and set the appropriate permissions. For simplicity sake, the web application creates files on disk rather than in a database. 
-
+### Configuration
+To make the deployment of puppet-facts simple and site configurable, we've included a config.php file that allows you to set default values for fields, as well as define additional facts that you want to add to your site. This file also includes folder paths that you can change based on your requirements. Detailed discussion of this file won't be done here, as the configuration file is marked up for ease of use.
 ## Usage
 ### Api
 To access the puppet facts, you'll need to access the api located at /getInfo.php. To gain information about a system, you provide it the macAddress of the system. (/getInfo.php?macAddress=00:00:00:00:00:00)
