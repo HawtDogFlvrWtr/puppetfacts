@@ -14,6 +14,7 @@ if (count($_POST) > 0 && $_POST['macAddress']) {
   file_put_contents($cleanMac.".json", $jsonConfs);
 }
 
+# Get system information
 if (isset($_GET["macAddress"])) {
   # Get Mac Address
   $macAddress = strtoupper($_GET["macAddress"]);
@@ -42,6 +43,7 @@ if (isset($_GET["macAddress"])) {
     echo "This systems configuration doesn't exist.<br>";
     echo printHelp();
   }
+# Get specific user information as json
 } else if (isset($_GET["username"]) && $_GET['username'] != 'admin') {
   # Get username 
   $username = $_GET["username"];
@@ -54,10 +56,12 @@ if (isset($_GET["macAddress"])) {
     echo "This user doesn't exist.<br>";
     echo printHelp();
   }
+# Get all users in one json return
 } else if (isset($_GET['allusers'])){
   $userArray = array();
   $files = glob($usersDir.'*.{json}', GLOB_BRACE);
   foreach($files as $file) {
+    # Skip the admin user, as it's only for web access
     if ($file !== $usersDir.'admin.json') {
       $jsonDecode = json_decode(file_get_contents($file), true);
       $userArray[] = $jsonDecode;
