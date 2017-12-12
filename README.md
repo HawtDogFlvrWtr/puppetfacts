@@ -46,9 +46,9 @@ Upon opening the webservice for the first time, you will need to login with the 
 ![AllSystems](/images/All_Systems.png)
 ### AddUser
 ![AddUser](/images/Add_User.png)
-### AllSystems
+### AllUsers
 ![AllUsers](/images/All_Users.png)
-### GenerateCreds
+### RoleCreds
 ![RoleCreds](/images/Role_Creds.png)
 ### SystemApi
 ![SystemApi](/images/System_Json.png)
