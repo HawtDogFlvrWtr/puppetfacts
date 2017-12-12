@@ -7,6 +7,7 @@ puppetfacts is a php framework, wrapped with a bootstrap interface. The framewor
 * [Usage](#usage)
   * [Api](#api)
   * [HTML Interface](#html-interface)
+  * [Examples](#examples)
 * [Screenshots](#screenshots)
   * [Home](#home)
   * [AddSystem](#addsystem)
@@ -25,7 +26,7 @@ Required:
 * Apache 2.4.X +
 * Php 5.4.16 +
 
-To install, simply clone this repository into the folder of your choice, create a credentials, and systems folder with permissions for your apache service to access them, and configure apache to access it. Ensure that all files and folders have the correct permission for apache to write files. For simplicity sake, the web application creates files on disk rather than in a database.
+To install, simply clone this repository into the folder of your choice, and run install.sh with bash. This should create the credentials and systems folders for you, and set the appropriate permissions. For simplicity sake, the web application creates files on disk rather than in a database. 
 
 ## Usage
 ### Api
@@ -37,6 +38,8 @@ To access all user information, you provide the allusers GET parameter to getInf
 To access a certain users information, you provide the username GET parameter to the getInfo.php (/getInfo.php?username=USERNAME)
 ### HTML Interface
 Upon opening the webservice for the first time, you will need to login with the username and password "admin". Please be sure to change this password or delete this user after creating your own. You'll also be reminded that you must set a default root and recovery user password, to ensure you can access puppetized systems. To do this, use the Generate Credentials page. Once this has been completed, you can begin creating, editing and deleting system and user configurations via the All Systems, Add System, All Users, and Add User menu links at the top of the page.
+### Examples
+To help with pulling facts for puppet, we've included two example scripts in the example folder. There is one example of pulling system based information as a fact in puppet, and another that allows you to pull all users with puppet. They are both written in python, and use packages that are generally a part of the base python installation (json & urllib2)
 ## Screenshots
 ### Home
 ![Home](/images/Home.png)
