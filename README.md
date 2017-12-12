@@ -11,8 +11,12 @@ puppetfacts is a php framework, wrapped with a bootstrap interface. The framewor
   * [Home](#home)
   * [AddSystem](#addsystem)
   * [AllSystems](#allsystems)
-  * [GenerateCreds](#generatecreds)
-  * [PullApi](#pullapi)
+  * [AddUser](#adduser)
+  * [AllUsers](#allusers)
+  * [RoleCreds](#rolecreds)
+  * [SystemApi](#systemapi)
+  * [UserApi](#userapi)
+  * [AllUsersApi](#allusersapi)
 * [Known Issues and Limitations](#known-issues-and-limitations)
 
 ## Setup
@@ -25,21 +29,33 @@ To install, simply clone this repository into the folder of your choice, create 
 
 ## Usage
 ### Api
-To access the puppet facts, you'll need to access the api located at /getInfo.php. To gain information about a system, you provide it the macAddress of the system. (/getinfo.php?macAddress=00:00:00:00:00:00)
+To access the puppet facts, you'll need to access the api located at /getInfo.php. To gain information about a system, you provide it the macAddress of the system. (/getInfo.php?macAddress=00:00:00:00:00:00)
 This will provide a json output, that you can parse as a factor on the puppetized system side, with the language of your choice. In the future, we will provide example fact executables that can be used to capture the facts that you've created.
+
+To access all user information, you provide the allusers GET parameter to getInfo.php (/getInfo.php?allusers)
+
+To access a certain users information, you provide the username GET parameter to the getInfo.php (/getInfo.php?username=USERNAME)
 ### HTML Interface
-Upon opening the webservice for the first time, you'll be reminded that you must set a default root and recovery user password, to ensure you can access puppetized systems. To do this, use the Generate Credentials page. Once this has been completed, you can begin creating, editing and deleting system configurations via the All Systems, and Add Systems links at the top of the page. 
+Upon opening the webservice for the first time, you will need to login with the username and password "admin". Please be sure to change this password or delete this user after creating your own. You'll also be reminded that you must set a default root and recovery user password, to ensure you can access puppetized systems. To do this, use the Generate Credentials page. Once this has been completed, you can begin creating, editing and deleting system and user configurations via the All Systems, Add System, All Users, and Add User menu links at the top of the page.
 ## Screenshots
 ### Home
-![Home](/images/home.png)
+![Home](/images/Home.png)
 ### AddSystem
-![AddSystem](/images/add_system.png)
+![AddSystem](/images/Add_System.png)
 ### AllSystems
-![AllSystems](/images/all_systems.png)
+![AllSystems](/images/All_Systems.png)
+### AddUser
+![AddUser](/images/Add_User.png)
+### AllSystems
+![AllUsers](/images/All_Users.png)
 ### GenerateCreds
-![GenerateCreds](/images/generate_creds.png)
-### PullApi
-![Api](/images/api_json.png)
+![RoleCreds](/images/Role_Creds.png)
+### SystemApi
+![SystemApi](/images/System_Json.png)
+### UserApi
+![UserApi](/images/User_Json.png)
+### AllUsersApi
+![AllUsersApi](/images/All_Users_Json.png)
 ## Known Issues and Limitations
 * PHP permissions must be set as such, that you're able to create local files.
 * Currently only works under linux. (*Now that python requirements have been removed, this may no longer be the case*)
