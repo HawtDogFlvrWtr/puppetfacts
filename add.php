@@ -102,7 +102,14 @@ if (isset($_GET['macAddress'])){
 <form method="post" action="add.php?<?php if (isset($queryArray['macAddress'])) { echo 'macAddress='.$queryArray['macAddress']; }?>"> 
   <div class="form-row">
     <div class="form-group col-md-2">
-      <label>MacAddress<input placeholder="00:00:00:00:00:00" class="form-control" type="text" id="macAddress" name="macAddress" value="<?php if (isset($queryArray['macAddress'])) { echo $queryArray['macAddress']; }?>"></label>
+      <?php
+       if (isset($queryArray['macAddress'])) {
+         $readonly = "readonly";
+       } else {
+         $readonly = "";
+       }
+      ?>
+      <label>MacAddress<input <?php echo $readonly; ?> placeholder="00:00:00:00:00:00" class="form-control" type="text" id="macAddress" name="macAddress" value="<?php if (isset($queryArray['macAddress'])) { echo $queryArray['macAddress']; }?>"></label>
     </div>
     <div class="form-group col-md-2">
       <label>Hostname<input placeholder="hostname" class="form-control" type="text" id="hostname" name="hostname" value="<?php if (isset($queryArray['hostname'])) { echo $queryArray['hostname']; }?>"></label>

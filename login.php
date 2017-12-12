@@ -13,6 +13,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
   if ($checkUser == 0) {
     session_start();
     $_SESSION['login_user'] = $username;
+    $_SESSION['app'] = 'puppetfacts';
+    $_SESSION['time'] = time();
     header("Location: index.php");
     die();
   } else if ($checkUser == 1) {
