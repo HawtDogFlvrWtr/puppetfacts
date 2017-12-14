@@ -23,7 +23,7 @@ if (isset($_GET['username'])){
     }
   }
 }
-# Get list of systems, This after the delete statement above, so it updates the page on post.
+# Get list of users, This after the delete statement above, so it updates the page on post.
 $files = glob($usersDir.'*.{json}', GLOB_BRACE);
 if ($msgBox != "") {
   echo '<div class="red-text container">';
@@ -80,7 +80,7 @@ if (count($files) > 0) {
                <div class="modal-content">
                  <form action="allUsers.php" method="get">
                    <div class="modal-body">
-                     <p class="lead">Are you sure you want to remove this system configuration?</p>
+                     <p class="lead">Are you sure you want to remove this users configuration?</p>
                    </div>
                    <div class="modal-footer">
                      <button type="input" name="username" value="'.$jsonDecode['username'].'" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Yes, Remove It</button>
