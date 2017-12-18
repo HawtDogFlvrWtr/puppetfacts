@@ -55,6 +55,9 @@ if (!file_exists($credDir."default.json")) {
       <li class="nav-item <?php if ($currentPage == 'generateCreds') { echo 'active'; } ?>">
         <a class="nav-margin btn btn-light btn-sm" href="generateCreds.php"><i class="fa fa-unlock-alt"></i> Role Credentials <?php if ($currentPage == 'generateCreds') { echo '<span class="sr-only">(current)</span>'; }?></a>
       </li>
+      <li class="nav-item <?php if ($currentPage == 'staticFacts') { echo 'active'; } ?>">
+        <a class="nav-margin btn btn-light btn-sm" href="staticFacts.php"><i class="fa fa-cogs"></i> Static Facts <?php if ($currentPage == 'staticFacts') { echo '<span class="sr-only">(current)</span>'; }?></a>
+      </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item active" >

@@ -11,6 +11,7 @@ $addFacts = array
 $systemsDir = 'systems/';
 $credDir = 'credentials/';
 $usersDir = 'usercreds/';
+$staticDir= 'static/';
 
 # Default values you want to populate on the add system dialog
 # This is good if you have settings that generally don't change or are very similair per system

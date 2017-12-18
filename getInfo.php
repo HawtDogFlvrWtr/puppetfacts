@@ -6,6 +6,7 @@ include 'config.php';
 #ini_set('display_startup_errors', 1); 
 #error_reporting(E_ALL);
 $credFiles = glob($credDir.'*.{json}', GLOB_BRACE);
+$staticFiles = glob($staticDir.'*', GLOB_BRACE);
 # input information from form submit
 if (count($_POST) > 0 && $_POST['macAddress']) {
   $jsonConfs = json_encode($_POST);
@@ -27,7 +28,16 @@ if (isset($_GET["macAddress"])) {
     # convert to array
     $jsonArrayBase = json_decode($fileContent, true);
     $role = $jsonArrayBase['role'];
-    # Get list of credentials
+    # Get static facts.
+    if (count($staticFiles) > 0) {
+      foreach($staticFiles as $factFile) {
+        $staticArray = array();
+        $factName = explode('/', $factFile);
+        $staticArray[$factName[1]] = file_get_contents($factFile);
+        $jsonArrayBase = array_merge($staticArray, $jsonArrayBase);
+      } 
+    }
+    # Get list of credentials.
     if (file_exists($credDir.$role.".json")) {
       $getCredJson = file_get_contents($credDir.$role.".json");
       $credJsonArray = json_decode($getCredJson, true);

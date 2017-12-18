@@ -14,6 +14,12 @@ if [ ! -d "systems" ]; then
 else
   echo "systems folder already exists. skipping"
 fi
+# making static folder
+if [ ! -d "static" ]; then
+  mkdir static
+else
+  echo "static folder already exists. skipping"
+fi
 
 # changing permissions
 chown -R $apacheUser:$apacheUser *
