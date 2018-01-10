@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'header.php';
 #ini_set('display_errors', 1);
 #ini_set('display_startup_errors', 1);
@@ -26,12 +26,13 @@ if ($msgBox != "") {
 }
 ?>
 <div class="container-margin container border rounded bg-light">
+<a class="btn btn-primary btn-sm hide-from-printer btn-padding btn-right" href="getSoftware.php?all"><i class="fa fa-archive"></i> View All Software</a>
 <h1>All Systems</h1>
 <p>These are the current systems that you have configuration information for. You can edit or delete any record.</p>
-<?php 
+<?php
 if (count($files) > 0) {
 ?>
-<table class="table">
+<table class="table table-hover table-responsive-md">
   <thead>
     <tr>
       <th scope="col">Hostname</th>
@@ -59,10 +60,11 @@ if (count($files) > 0) {
      echo '<td>'.$jsonDecode['macAddress'].'</td>';
      echo '<td>'.$jsonDecode['ipAddresses'].'</td>';
      echo '<td>
-	<a class="btn btn-warning btn-icon" href="add.php?macAddress='.$jsonDecode['macAddress'].'"><i class="fa fa-edit"></i> Edit</a>
-	<a data-toggle="modal" href="#delete'.$row.'" class="btn btn-danger btn-icon" data-dismiss="modal"><i class="fa fa-trash-alt"></i> Delete</a>
-	<a target="_blank" href="getInfo.php?macAddress='.$jsonDecode['macAddress'].'" class="btn btn-success btn-icon"><i class="fa fa-code"></i> JSON</a>
-	  </td>';
+        <a class="btn btn-sm btn-warning btn-icon" href="add.php?macAddress='.$jsonDecode['macAddress'].'"><i class="fa fa-edit"></i> Edit</a>
+        <a data-toggle="modal" href="#delete'.$row.'" class="btn btn-sm btn-danger btn-icon" data-dismiss="modal"><i class="fa fa-trash-alt"></i> Delete</a>
+        <a target="_blank" href="getInfo.php?macAddress='.$jsonDecode['macAddress'].'" class="btn btn-sm btn-success btn-icon"><i class="fa fa-code"></i> JSON</a>
+        <a target="_blank" href="getSoftware.php?macAddress='.$jsonDecode['macAddress'].'&hostname='.$jsonDecode['hostname'].'" class="btn btn-sm btn-primary btn-icon"><i class="fa fa-archive"></i> Software</a>
+          </td>';
      echo '</tr>';
      echo '<div id="delete'.$row.'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
              <div class="modal-dialog">
