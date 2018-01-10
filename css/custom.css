@@ -37,3 +37,16 @@ input, select {
     float: none;
     margin: 0 auto;
 }
+.btn-padding{
+  margin:10px;
+}
+.btn-right{
+  float:right;
+}
+.footer{
+  min-height:100px;
+}
+@media print {
+  /* style sheet for print goes here */
+  .hide-from-printer{  display:none; }
+}
